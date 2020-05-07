@@ -7,13 +7,9 @@
 
 #import "TriangleViewController.h"
 
-#import "TriangleView.h"
-
 #import "OpenGLESUtils.h"
 
 @interface TriangleViewController ()
-
-@property (nonatomic, strong) TriangleView * triangleView;
 @end
 
 @implementation TriangleViewController {
@@ -25,6 +21,9 @@
     GLuint _FBO, _RBO;
     
     GLuint _glProgram;
+    
+    GLuint _positionLoc;
+    GLuint _colorLoc;
 }
 
 - (void)viewDidLoad {
@@ -36,7 +35,8 @@
     [self setupLayer];
     [self createBuffers];
     [self setupProgram];
-    [self draw];
+    [self setupDrawable];
+    [self renderVertex_VAO_Index];
     [self present];
 }
 
@@ -110,35 +110,192 @@
     glDeleteShader(fragment);
     
     glUseProgram(_glProgram);
+    
+    _positionLoc = glGetAttribLocation(_glProgram, "position");
+    _colorLoc = glGetAttribLocation(_glProgram, "vColor");
 }
 
-- (void)draw {
+- (void)setupDrawable {
     
     glClearColor(0, 0, 0, 1);
     glClear(GL_COLOR_BUFFER_BIT);
     
     glViewport(0, 0, self.view.bounds.size.width, self.view.bounds.size.height);
     
-     const GLfloat vertices[] = {
-        0, 0.5, 0,
-        -0.5, -0.5, 0,
-        0.5, -0.5, 0 };
+}
+
+static const GLfloat vertices[] = {
+    0, 0.5, 0,
+    -0.5, -0.5, 0,
+    0.5, -0.5, 0
+};
+
+static const GLfloat color_data[] = {
+    1, 0, 0,
+    0, 1, 0,
+    0, 0, 1,
+};
+
+static const GLushort indices[] = {
+  0, 1, 2,
+};
+
+/// 离屏渲染相关：
+
+- (void)renderVertex_Directly {
     
-    static const GLfloat color_data[] = {
-        1, 0, 0,
-        0, 1, 0,
-        1, 0, 0,
-    };
+    // 1. 上传顶点
+    glVertexAttribPointer(_positionLoc, 3, GL_FLOAT, GL_FALSE, 0, vertices);
+    glEnableVertexAttribArray(_positionLoc);
     
-    GLuint position = glGetAttribLocation(_glProgram, "position");
-    glVertexAttribPointer(position, 3, GL_FLOAT, GL_FALSE, 0, vertices);
-    glEnableVertexAttribArray(position);
+    glVertexAttribPointer(_colorLoc, 3, GL_FLOAT, GL_FALSE, 0, color_data);
+    glEnableVertexAttribArray(_colorLoc);
     
-    GLuint color = glGetAttribLocation(_glProgram, "vColor");
-    glVertexAttribPointer(color, 3, GL_FLOAT, GL_FALSE, 0, color_data);
-    glEnableVertexAttribArray(color);
-    
+    // 2. 渲染
     glDrawArrays(GL_TRIANGLES, 0, 3);
+}
+
+- (void)renderVertex_VBO {
+    
+    // 1. 初始化 & 激活 VBO
+    GLuint VBO[2];
+    glGenBuffers(2, VBO);
+    
+    glBindBuffer(GL_ARRAY_BUFFER, VBO[0]); // 使用这个缓冲对象（缓冲区有两个对象，需要告诉 OGL 下面的代码要使用哪一个
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+    glVertexAttribPointer(_positionLoc, 3, GL_FLOAT, GL_FALSE, 0, 0);
+    glEnableVertexAttribArray(_positionLoc);
+    
+    glBindBuffer(GL_ARRAY_BUFFER, VBO[1]);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(color_data), color_data, GL_STATIC_DRAW);
+    glVertexAttribPointer(_colorLoc, 3, GL_FLOAT, GL_FALSE, 0, 0);
+    glEnableVertexAttribArray(_colorLoc);
+
+    // 3. 渲染
+    glDrawArrays(GL_TRIANGLES, 0, 3);
+}
+
+- (void)renderVertex_VAO {
+    
+    // 1. 初始化 VAO （接下来所有操作顶点操作都将加入到 VAO 中）
+    GLuint VAO;
+    glGenVertexArrays(1, &VAO);
+    glBindVertexArray(VAO);
+    
+    // 1.1 构造 & 激活 VBO
+    GLuint VBO[2];
+    glGenBuffers(2, VBO);
+    
+    glBindBuffer(GL_ARRAY_BUFFER, VBO[0]);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+    glVertexAttribPointer(_positionLoc, 3, GL_FLOAT, GL_FALSE, 0, 0);
+    glEnableVertexAttribArray(_positionLoc);
+    
+    glBindBuffer(GL_ARRAY_BUFFER, VBO[1]);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(color_data), color_data, GL_STATIC_DRAW);
+    glVertexAttribPointer(_colorLoc, 3, GL_FLOAT, GL_FALSE, 0, 0);
+    glEnableVertexAttribArray(_colorLoc);
+    
+    // 1.2 停用当前 VAO & VBO，注意顺序 （好习惯，单个的时候可以不写）
+    glBindVertexArray(0);
+    
+    glBindBuffer(VBO[0], 0);
+    glBindBuffer(VBO[1], 0);
+    
+    // 2. 渲染
+    
+    // 2.1 使用 VAO，因为在 1.2 中停用了
+    glBindVertexArray(VAO);
+    
+    // 2.2 渲染
+    glDrawArrays(GL_TRIANGLES, 0, 3);
+}
+
+- (void)renderVertex_Directly_Index {
+    
+    // 1. 上传顶点
+    glVertexAttribPointer(_positionLoc, 3, GL_FLOAT, GL_FALSE, 0, vertices);
+    glEnableVertexAttribArray(_positionLoc);
+    
+    glVertexAttribPointer(_colorLoc, 3, GL_FLOAT, GL_FALSE, 0, color_data);
+    glEnableVertexAttribArray(_colorLoc);
+    
+    // 2. 渲染
+    // 1 * 3 代表： 1 个面，每个面由 3 个顶点组成
+    glDrawElements(GL_TRIANGLE_STRIP, 1 * 3, GL_UNSIGNED_SHORT, indices);
+}
+
+- (void)renderVertex_VBO_Index {
+    
+    // 1. 初始化 & 激活 VBO
+    GLuint VBO[2];
+    glGenBuffers(2, VBO);
+    
+    
+    glBindBuffer(GL_ARRAY_BUFFER, VBO[0]); // 使用这个缓冲对象（缓冲区有两个对象，需要告诉 OGL 下面的代码要使用哪一个
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+    glVertexAttribPointer(_positionLoc, 3, GL_FLOAT, GL_FALSE, 0, 0);
+    glEnableVertexAttribArray(_positionLoc);
+    
+    glBindBuffer(GL_ARRAY_BUFFER, VBO[1]);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(color_data), color_data, GL_STATIC_DRAW);
+    glVertexAttribPointer(_colorLoc, 3, GL_FLOAT, GL_FALSE, 0, 0);
+    glEnableVertexAttribArray(_colorLoc);
+    
+    // 1.1 初始化 & 激活 索引 VBO
+    GLuint indexVBO;
+    glGenBuffers(1, &indexVBO);
+    
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexVBO);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+    // 3. 渲染
+    // 1 * 3 代表： 1 个面，每个面由 3 个顶点组成
+    glDrawElements(GL_TRIANGLE_STRIP, 1 * 3, GL_UNSIGNED_SHORT, 0);
+}
+
+- (void)renderVertex_VAO_Index {
+    
+    // 1. 初始化 VAO （接下来所有操作顶点操作都将加入到 VAO 中）
+    GLuint VAO;
+    glGenVertexArrays(1, &VAO);
+    glBindVertexArray(VAO);
+    
+    // 1.1 构造 & 激活 VBO
+    GLuint VBO[2];
+    glGenBuffers(2, VBO);
+    
+    glBindBuffer(GL_ARRAY_BUFFER, VBO[0]);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+    glVertexAttribPointer(_positionLoc, 3, GL_FLOAT, GL_FALSE, 0, 0);
+    glEnableVertexAttribArray(_positionLoc);
+    
+    glBindBuffer(GL_ARRAY_BUFFER, VBO[1]);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(color_data), color_data, GL_STATIC_DRAW);
+    glVertexAttribPointer(_colorLoc, 3, GL_FLOAT, GL_FALSE, 0, 0);
+    glEnableVertexAttribArray(_colorLoc);
+    
+    // 1.1.1 初始化 & 激活 索引 VBO
+    GLuint indexVBO;
+    glGenBuffers(1, &indexVBO);
+    
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexVBO);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+    
+    // 1.2 停用当前 VAO & VBO，注意顺序 （好习惯，单个的时候可以不写）
+    glBindVertexArray(0);
+    
+    glBindBuffer(VBO[0], 0);
+    glBindBuffer(VBO[1], 0);
+    
+    // 2. 渲染
+    
+    // 2.1 使用 VAO，因为在 1.2 中停用了
+    glBindVertexArray(VAO);
+    
+    // 2.2 渲染
+    // 1 * 3 代表： 1 个面，每个面由 3 个顶点组成
+    glDrawElements(GL_TRIANGLE_STRIP, 1 * 3, GL_UNSIGNED_SHORT, 0);
 }
 
 - (void)present {

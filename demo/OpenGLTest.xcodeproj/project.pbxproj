@@ -14,7 +14,6 @@
 		3B01B208246269EA00239EAD /* TriangleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B01B207246269EA00239EAD /* TriangleViewController.m */; };
 		3B061A762462B224009DBDD3 /* passthrough.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 3B061A752462B224009DBDD3 /* passthrough.vsh */; };
 		3B061A782462B242009DBDD3 /* passthrough.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 3B061A772462B242009DBDD3 /* passthrough.fsh */; };
-		3B061A7B2462D2D3009DBDD3 /* TriangleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B061A7A2462D2D3009DBDD3 /* TriangleView.m */; };
 		3B89454E2463277A0046F231 /* OpenGLESUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B89454D2463277A0046F231 /* OpenGLESUtils.m */; };
 /* End PBXBuildFile section */
 
@@ -31,8 +30,6 @@
 		3B01B207246269EA00239EAD /* TriangleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TriangleViewController.m; sourceTree = "<group>"; };
 		3B061A752462B224009DBDD3 /* passthrough.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = passthrough.vsh; sourceTree = "<group>"; };
 		3B061A772462B242009DBDD3 /* passthrough.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = passthrough.fsh; sourceTree = "<group>"; };
-		3B061A792462D2D3009DBDD3 /* TriangleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TriangleView.h; sourceTree = "<group>"; };
-		3B061A7A2462D2D3009DBDD3 /* TriangleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TriangleView.m; sourceTree = "<group>"; };
 		3B89454C2463277A0046F231 /* OpenGLESUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenGLESUtils.h; sourceTree = "<group>"; };
 		3B89454D2463277A0046F231 /* OpenGLESUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OpenGLESUtils.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -111,8 +108,6 @@
 			children = (
 				3B01B206246269EA00239EAD /* TriangleViewController.h */,
 				3B01B207246269EA00239EAD /* TriangleViewController.m */,
-				3B061A792462D2D3009DBDD3 /* TriangleView.h */,
-				3B061A7A2462D2D3009DBDD3 /* TriangleView.m */,
 			);
 			path = "1.三角形";
 			sourceTree = "<group>";
@@ -198,7 +193,6 @@
 			files = (
 				3B01B208246269EA00239EAD /* TriangleViewController.m in Sources */,
 				3B01B1F1246268C300239EAD /* ViewController.m in Sources */,
-				3B061A7B2462D2D3009DBDD3 /* TriangleView.m in Sources */,
 				3B01B1EB246268C300239EAD /* AppDelegate.m in Sources */,
 				3B89454E2463277A0046F231 /* OpenGLESUtils.m in Sources */,
 				3B01B1FC246268C700239EAD /* main.m in Sources */,
