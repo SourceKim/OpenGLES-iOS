@@ -14,6 +14,10 @@
 		3B01B208246269EA00239EAD /* TriangleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B01B207246269EA00239EAD /* TriangleViewController.m */; };
 		3B061A762462B224009DBDD3 /* passthrough.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 3B061A752462B224009DBDD3 /* passthrough.vsh */; };
 		3B061A782462B242009DBDD3 /* passthrough.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 3B061A772462B242009DBDD3 /* passthrough.fsh */; };
+		3B7AC28424647904006DDE6E /* DrawImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B7AC28324647904006DDE6E /* DrawImageViewController.m */; };
+		3B7AC2862464790B006DDE6E /* avatar.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 3B7AC2852464790B006DDE6E /* avatar.JPG */; };
+		3B7AC28824647D6F006DDE6E /* image.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 3B7AC28724647D6F006DDE6E /* image.vsh */; };
+		3B7AC28A24647DDA006DDE6E /* image.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 3B7AC28924647DDA006DDE6E /* image.fsh */; };
 		3B89454E2463277A0046F231 /* OpenGLESUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B89454D2463277A0046F231 /* OpenGLESUtils.m */; };
 /* End PBXBuildFile section */
 
@@ -30,6 +34,11 @@
 		3B01B207246269EA00239EAD /* TriangleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TriangleViewController.m; sourceTree = "<group>"; };
 		3B061A752462B224009DBDD3 /* passthrough.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = passthrough.vsh; sourceTree = "<group>"; };
 		3B061A772462B242009DBDD3 /* passthrough.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = passthrough.fsh; sourceTree = "<group>"; };
+		3B7AC28224647904006DDE6E /* DrawImageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DrawImageViewController.h; sourceTree = "<group>"; };
+		3B7AC28324647904006DDE6E /* DrawImageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DrawImageViewController.m; sourceTree = "<group>"; };
+		3B7AC2852464790B006DDE6E /* avatar.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = avatar.JPG; sourceTree = "<group>"; };
+		3B7AC28724647D6F006DDE6E /* image.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = image.vsh; sourceTree = "<group>"; };
+		3B7AC28924647DDA006DDE6E /* image.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = image.fsh; sourceTree = "<group>"; };
 		3B89454C2463277A0046F231 /* OpenGLESUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenGLESUtils.h; sourceTree = "<group>"; };
 		3B89454D2463277A0046F231 /* OpenGLESUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OpenGLESUtils.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -90,6 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				3B01B205246269B200239EAD /* 1.三角形 */,
+				3B7AC281246478D9006DDE6E /* 2. 画一张图片 */,
 			);
 			path = tests;
 			sourceTree = "<group>";
@@ -106,6 +116,8 @@
 		3B01B205246269B200239EAD /* 1.三角形 */ = {
 			isa = PBXGroup;
 			children = (
+				3B061A752462B224009DBDD3 /* passthrough.vsh */,
+				3B061A772462B242009DBDD3 /* passthrough.fsh */,
 				3B01B206246269EA00239EAD /* TriangleViewController.h */,
 				3B01B207246269EA00239EAD /* TriangleViewController.m */,
 			);
@@ -115,10 +127,20 @@
 		3B061A742462B206009DBDD3 /* shaders */ = {
 			isa = PBXGroup;
 			children = (
-				3B061A752462B224009DBDD3 /* passthrough.vsh */,
-				3B061A772462B242009DBDD3 /* passthrough.fsh */,
 			);
 			path = shaders;
+			sourceTree = "<group>";
+		};
+		3B7AC281246478D9006DDE6E /* 2. 画一张图片 */ = {
+			isa = PBXGroup;
+			children = (
+				3B7AC2852464790B006DDE6E /* avatar.JPG */,
+				3B7AC28224647904006DDE6E /* DrawImageViewController.h */,
+				3B7AC28324647904006DDE6E /* DrawImageViewController.m */,
+				3B7AC28724647D6F006DDE6E /* image.vsh */,
+				3B7AC28924647DDA006DDE6E /* image.fsh */,
+			);
+			path = "2. 画一张图片";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -178,9 +200,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B7AC2862464790B006DDE6E /* avatar.JPG in Resources */,
 				3B01B1F6246268C700239EAD /* Assets.xcassets in Resources */,
 				3B061A782462B242009DBDD3 /* passthrough.fsh in Resources */,
 				3B061A762462B224009DBDD3 /* passthrough.vsh in Resources */,
+				3B7AC28824647D6F006DDE6E /* image.vsh in Resources */,
+				3B7AC28A24647DDA006DDE6E /* image.fsh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -191,6 +216,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B7AC28424647904006DDE6E /* DrawImageViewController.m in Sources */,
 				3B01B208246269EA00239EAD /* TriangleViewController.m in Sources */,
 				3B01B1F1246268C300239EAD /* ViewController.m in Sources */,
 				3B01B1EB246268C300239EAD /* AppDelegate.m in Sources */,

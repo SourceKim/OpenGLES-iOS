@@ -31,6 +31,7 @@ NSString * const kCellId = @"cellId";
     
     _testMap = @ {
         @"1. 三角形": @"TriangleViewController",
+        @"2. 画一张图片": @"DrawImageViewController",
     };
     
 }
