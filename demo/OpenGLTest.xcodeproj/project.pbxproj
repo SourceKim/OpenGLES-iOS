@@ -14,6 +14,9 @@
 		3B01B208246269EA00239EAD /* TriangleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B01B207246269EA00239EAD /* TriangleViewController.m */; };
 		3B061A762462B224009DBDD3 /* passthrough.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 3B061A752462B224009DBDD3 /* passthrough.vsh */; };
 		3B061A782462B242009DBDD3 /* passthrough.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 3B061A772462B242009DBDD3 /* passthrough.fsh */; };
+		3B76AE2F246989E000FBA7E8 /* PreserAspectRatioForceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B76AE2E246989E000FBA7E8 /* PreserAspectRatioForceViewController.m */; };
+		3B76AE332469C6AE00FBA7E8 /* OpenGLDisplayFillModeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B76AE322469C6AE00FBA7E8 /* OpenGLDisplayFillModeViewController.m */; };
+		3B76AE372469D0C000FBA7E8 /* OpenGLSampleModeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B76AE362469D0C000FBA7E8 /* OpenGLSampleModeViewController.m */; };
 		3B7AC28424647904006DDE6E /* DrawImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B7AC28324647904006DDE6E /* DrawImageViewController.m */; };
 		3B7AC2862464790B006DDE6E /* avatar.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 3B7AC2852464790B006DDE6E /* avatar.JPG */; };
 		3B7AC28824647D6F006DDE6E /* image.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 3B7AC28724647D6F006DDE6E /* image.vsh */; };
@@ -35,6 +38,12 @@
 		3B01B207246269EA00239EAD /* TriangleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TriangleViewController.m; sourceTree = "<group>"; };
 		3B061A752462B224009DBDD3 /* passthrough.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = passthrough.vsh; sourceTree = "<group>"; };
 		3B061A772462B242009DBDD3 /* passthrough.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = passthrough.fsh; sourceTree = "<group>"; };
+		3B76AE2D246989E000FBA7E8 /* PreserAspectRatioForceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PreserAspectRatioForceViewController.h; sourceTree = "<group>"; };
+		3B76AE2E246989E000FBA7E8 /* PreserAspectRatioForceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PreserAspectRatioForceViewController.m; sourceTree = "<group>"; };
+		3B76AE312469C6AE00FBA7E8 /* OpenGLDisplayFillModeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenGLDisplayFillModeViewController.h; sourceTree = "<group>"; };
+		3B76AE322469C6AE00FBA7E8 /* OpenGLDisplayFillModeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OpenGLDisplayFillModeViewController.m; sourceTree = "<group>"; };
+		3B76AE352469D0C000FBA7E8 /* OpenGLSampleModeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenGLSampleModeViewController.h; sourceTree = "<group>"; };
+		3B76AE362469D0C000FBA7E8 /* OpenGLSampleModeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OpenGLSampleModeViewController.m; sourceTree = "<group>"; };
 		3B7AC28224647904006DDE6E /* DrawImageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DrawImageViewController.h; sourceTree = "<group>"; };
 		3B7AC28324647904006DDE6E /* DrawImageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DrawImageViewController.m; sourceTree = "<group>"; };
 		3B7AC2852464790B006DDE6E /* avatar.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = avatar.JPG; sourceTree = "<group>"; };
@@ -135,6 +144,33 @@
 			path = shaders;
 			sourceTree = "<group>";
 		};
+		3B76AE2C246989A900FBA7E8 /* 纹理保持比例（暴力） */ = {
+			isa = PBXGroup;
+			children = (
+				3B76AE2D246989E000FBA7E8 /* PreserAspectRatioForceViewController.h */,
+				3B76AE2E246989E000FBA7E8 /* PreserAspectRatioForceViewController.m */,
+			);
+			path = "纹理保持比例（暴力）";
+			sourceTree = "<group>";
+		};
+		3B76AE302469C65A00FBA7E8 /* OpenGL ES 实现填充模式 */ = {
+			isa = PBXGroup;
+			children = (
+				3B76AE312469C6AE00FBA7E8 /* OpenGLDisplayFillModeViewController.h */,
+				3B76AE322469C6AE00FBA7E8 /* OpenGLDisplayFillModeViewController.m */,
+			);
+			path = "OpenGL ES 实现填充模式";
+			sourceTree = "<group>";
+		};
+		3B76AE342469D02F00FBA7E8 /* OpenGL ES 纹理采样模式 */ = {
+			isa = PBXGroup;
+			children = (
+				3B76AE352469D0C000FBA7E8 /* OpenGLSampleModeViewController.h */,
+				3B76AE362469D0C000FBA7E8 /* OpenGLSampleModeViewController.m */,
+			);
+			path = "OpenGL ES 纹理采样模式";
+			sourceTree = "<group>";
+		};
 		3B7AC281246478D9006DDE6E /* 2. 画一张图片 */ = {
 			isa = PBXGroup;
 			children = (
@@ -150,7 +186,10 @@
 		3BCEC2152469645E00BD0C10 /* 3. 纹理详解 */ = {
 			isa = PBXGroup;
 			children = (
+				3B76AE342469D02F00FBA7E8 /* OpenGL ES 纹理采样模式 */,
+				3B76AE302469C65A00FBA7E8 /* OpenGL ES 实现填充模式 */,
 				3BCEC216246964A200BD0C10 /* AVMakeRectWithAspectRatioInsideRect测试 */,
+				3B76AE2C246989A900FBA7E8 /* 纹理保持比例（暴力） */,
 			);
 			path = "3. 纹理详解";
 			sourceTree = "<group>";
@@ -237,13 +276,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B76AE372469D0C000FBA7E8 /* OpenGLSampleModeViewController.m in Sources */,
 				3BCEC219246964CE00BD0C10 /* TestAVFoundationAspectRatioViewController.m in Sources */,
 				3B7AC28424647904006DDE6E /* DrawImageViewController.m in Sources */,
 				3B01B208246269EA00239EAD /* TriangleViewController.m in Sources */,
 				3B01B1F1246268C300239EAD /* ViewController.m in Sources */,
+				3B76AE332469C6AE00FBA7E8 /* OpenGLDisplayFillModeViewController.m in Sources */,
 				3B01B1EB246268C300239EAD /* AppDelegate.m in Sources */,
 				3B89454E2463277A0046F231 /* OpenGLESUtils.m in Sources */,
 				3B01B1FC246268C700239EAD /* main.m in Sources */,
+				3B76AE2F246989E000FBA7E8 /* PreserAspectRatioForceViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
