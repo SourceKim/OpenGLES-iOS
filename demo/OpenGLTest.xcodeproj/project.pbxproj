@@ -19,6 +19,7 @@
 		3B7AC28824647D6F006DDE6E /* image.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 3B7AC28724647D6F006DDE6E /* image.vsh */; };
 		3B7AC28A24647DDA006DDE6E /* image.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 3B7AC28924647DDA006DDE6E /* image.fsh */; };
 		3B89454E2463277A0046F231 /* OpenGLESUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B89454D2463277A0046F231 /* OpenGLESUtils.m */; };
+		3BCEC219246964CE00BD0C10 /* TestAVFoundationAspectRatioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BCEC218246964CE00BD0C10 /* TestAVFoundationAspectRatioViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,8 @@
 		3B7AC28924647DDA006DDE6E /* image.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = image.fsh; sourceTree = "<group>"; };
 		3B89454C2463277A0046F231 /* OpenGLESUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenGLESUtils.h; sourceTree = "<group>"; };
 		3B89454D2463277A0046F231 /* OpenGLESUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OpenGLESUtils.m; sourceTree = "<group>"; };
+		3BCEC217246964CE00BD0C10 /* TestAVFoundationAspectRatioViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestAVFoundationAspectRatioViewController.h; sourceTree = "<group>"; };
+		3BCEC218246964CE00BD0C10 /* TestAVFoundationAspectRatioViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestAVFoundationAspectRatioViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +103,7 @@
 			children = (
 				3B01B205246269B200239EAD /* 1.三角形 */,
 				3B7AC281246478D9006DDE6E /* 2. 画一张图片 */,
+				3BCEC2152469645E00BD0C10 /* 3. 纹理详解 */,
 			);
 			path = tests;
 			sourceTree = "<group>";
@@ -141,6 +145,23 @@
 				3B7AC28924647DDA006DDE6E /* image.fsh */,
 			);
 			path = "2. 画一张图片";
+			sourceTree = "<group>";
+		};
+		3BCEC2152469645E00BD0C10 /* 3. 纹理详解 */ = {
+			isa = PBXGroup;
+			children = (
+				3BCEC216246964A200BD0C10 /* AVMakeRectWithAspectRatioInsideRect测试 */,
+			);
+			path = "3. 纹理详解";
+			sourceTree = "<group>";
+		};
+		3BCEC216246964A200BD0C10 /* AVMakeRectWithAspectRatioInsideRect测试 */ = {
+			isa = PBXGroup;
+			children = (
+				3BCEC217246964CE00BD0C10 /* TestAVFoundationAspectRatioViewController.h */,
+				3BCEC218246964CE00BD0C10 /* TestAVFoundationAspectRatioViewController.m */,
+			);
+			path = "AVMakeRectWithAspectRatioInsideRect测试";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -216,6 +237,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3BCEC219246964CE00BD0C10 /* TestAVFoundationAspectRatioViewController.m in Sources */,
 				3B7AC28424647904006DDE6E /* DrawImageViewController.m in Sources */,
 				3B01B208246269EA00239EAD /* TriangleViewController.m in Sources */,
 				3B01B1F1246268C300239EAD /* ViewController.m in Sources */,
