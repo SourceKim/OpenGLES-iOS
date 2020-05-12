@@ -42,6 +42,37 @@
     return shader;
 }
 
++ (GLuint)linkProgram:(GLuint)vertexShader fragmentShader:(GLuint)fragmentShader {
+    
+    GLuint program;
+    
+    program = glCreateProgram();
+    
+    glAttachShader(program, vertexShader);
+    glAttachShader(program, fragmentShader);
+    
+    glLinkProgram(program);
+    
+    GLint linkStatus;
+    glGetProgramiv(program, GL_LINK_STATUS, &linkStatus);
+    
+    if (linkStatus == GL_FALSE) {
+        
+        GLsizei len;
+        glGetProgramiv(program, GL_INFO_LOG_LENGTH, &len);
+        
+        GLchar *log = (GLchar *)malloc(sizeof(GLchar) * len);
+        glGetProgramInfoLog(program, len, NULL, log);
+        
+        NSLog(@"Link error, err - %s", log);
+    }
+    
+    glDeleteShader(vertexShader);
+    glDeleteShader(fragmentShader);
+    
+    return program;
+}
+
 + (GLfloat *)generateVertices: (OpenGLFillMode)fillMode
              withDisplayRatio: (GLfloat)displayRatio
                 withImageSize: (CGSize)imageSize

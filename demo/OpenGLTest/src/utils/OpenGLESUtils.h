@@ -22,6 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (GLuint)createShader: (NSString *)path type: (GLenum)type;
 
++ (GLuint)linkProgram: (GLuint)vertexShader fragmentShader: (GLuint)fragmentShader;
+
 /// 生成顶点
 /// @param fillMode 模式
 /// @param displayRatio 展示的纹理占 Viewport 的百分比
