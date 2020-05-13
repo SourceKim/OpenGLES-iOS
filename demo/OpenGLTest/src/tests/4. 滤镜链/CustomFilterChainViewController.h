@@ -1,7 +1,7 @@
-////  FilterChainViewController.h
+////  CustomFilterChainViewController.h
 //  OpenGLTest
 //
-//  Created by Su Jinjin on 2020/5/12.
+//  Created by Su Jinjin on 2020/5/13.
 //  Copyright © 2020 苏金劲. All rights reserved.
 //
 
@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface FilterChainViewController : UIViewController
+@interface CustomFilterChainViewController : UIViewController
 
 @end
 

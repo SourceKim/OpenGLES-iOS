@@ -34,6 +34,8 @@ NS_ASSUME_NONNULL_BEGIN
                 withImageSize: (CGSize)imageSize
              withViewPortSize: (CGSize)viewPortSize;
 
++ (GLuint)loadImageTexture: (UIImage *)image;
+
 @end
 
 NS_ASSUME_NONNULL_END
