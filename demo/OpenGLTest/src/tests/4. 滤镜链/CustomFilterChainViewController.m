@@ -203,15 +203,16 @@ static const GLushort indices[] = {
     
     // 配置 FBO[0] - Temp FrameBuffer
     glBindFramebuffer(GL_FRAMEBUFFER, _FBOs[0]); // 使用 FBO[0]，下面的激活 & 绑定操作都会对应到这个 FrameBuffer
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, _tmpTexture, 0);
+    
     glActiveTexture(GL_TEXTURE0 + _imageTextureBufferIndex); // 使用这个 texture
     glBindTexture(GL_TEXTURE_2D, _imageTexture); // 绑定这个 texture 到 framebuffer（ 重要，如果没有这个，将无法上传纹理到 uniform ）
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, _tmpTexture, 0);
     
     // 配置 FBO[1] - Render FrameBuffer
     glBindFramebuffer(GL_FRAMEBUFFER, _FBOs[1]); // 使用 FBO[1]，下面的激活 & 绑定操作都会对应到这个 FrameBuffer
+    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, _RBO);
     glActiveTexture(GL_TEXTURE0 + _tmpTextureBufferIndex); // 使用这个 texture
     glBindTexture(GL_TEXTURE_2D, _tmpTexture); // 绑定这个 texture 到 framebuffer（ 重要，如果没有这个，将无法上传纹理到 uniform ）
-    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, _RBO);
 }
 
 - (void)clearFBO: (CGSize)size {
