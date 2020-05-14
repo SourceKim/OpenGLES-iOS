@@ -83,7 +83,7 @@ static const GLushort indices[] = {
     _image = [UIImage imageNamed: @"avatar.JPG"];
     _imageTextureBufferIndex = 5;
     
-    _cameraDistance = -2;
+    _cameraDistance = 2;
     
     _modelMatrix = GLKMatrix4Identity;
     _viewMatrix = GLKMatrix4MakeLookAt(0, 0, _cameraDistance, 0, 0, 0, 0, 1, 0);
