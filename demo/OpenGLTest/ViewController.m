@@ -37,6 +37,7 @@ NSString * const kCellId = @"cellId";
         @"3.3. 纹理详解 - OpenGL ES 实现填充模式": @"OpenGLDisplayFillModeViewController",
         @"3.4. 纹理详解 - OpenGL ES 采样模式": @"OpenGLSampleModeViewController",
         @"4. 滤镜链": @"CustomFilterChainViewController",
+        @"5. 三维变换": @"ThreeDimentionTransformViewController",
     };
     
 }

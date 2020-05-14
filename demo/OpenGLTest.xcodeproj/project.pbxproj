@@ -24,6 +24,10 @@
 		3B7E6288246BE000001FA4CE /* CustomFilterChainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B7E6286246BE000001FA4CE /* CustomFilterChainViewController.m */; };
 		3B7E6289246BE000001FA4CE /* CustomFilterChainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B7E6287246BE000001FA4CE /* CustomFilterChainViewController.xib */; };
 		3B89454E2463277A0046F231 /* OpenGLESUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B89454D2463277A0046F231 /* OpenGLESUtils.m */; };
+		3BA5AA24246D172500C150FF /* ThreeDimentionTransformViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BA5AA22246D172500C150FF /* ThreeDimentionTransformViewController.m */; };
+		3BA5AA25246D172500C150FF /* ThreeDimentionTransformViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3BA5AA23246D172500C150FF /* ThreeDimentionTransformViewController.xib */; };
+		3BA5AA27246D1D1E00C150FF /* ThreeDimentionTransform.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 3BA5AA26246D1D1E00C150FF /* ThreeDimentionTransform.vsh */; };
+		3BA5AA29246D1D2D00C150FF /* ThreeDimentionTransform.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 3BA5AA28246D1D2D00C150FF /* ThreeDimentionTransform.fsh */; };
 		3BCEC219246964CE00BD0C10 /* TestAVFoundationAspectRatioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BCEC218246964CE00BD0C10 /* TestAVFoundationAspectRatioViewController.m */; };
 		3BCEC21F246A8B4E00BD0C10 /* GaryFilter.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 3BCEC21E246A8B4E00BD0C10 /* GaryFilter.fsh */; };
 		3BCEC221246A8B6900BD0C10 /* BrightnessFilter.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 3BCEC220246A8B6900BD0C10 /* BrightnessFilter.fsh */; };
@@ -59,6 +63,11 @@
 		3B7E6287246BE000001FA4CE /* CustomFilterChainViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomFilterChainViewController.xib; sourceTree = "<group>"; };
 		3B89454C2463277A0046F231 /* OpenGLESUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenGLESUtils.h; sourceTree = "<group>"; };
 		3B89454D2463277A0046F231 /* OpenGLESUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OpenGLESUtils.m; sourceTree = "<group>"; };
+		3BA5AA21246D172500C150FF /* ThreeDimentionTransformViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThreeDimentionTransformViewController.h; sourceTree = "<group>"; };
+		3BA5AA22246D172500C150FF /* ThreeDimentionTransformViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ThreeDimentionTransformViewController.m; sourceTree = "<group>"; };
+		3BA5AA23246D172500C150FF /* ThreeDimentionTransformViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ThreeDimentionTransformViewController.xib; sourceTree = "<group>"; };
+		3BA5AA26246D1D1E00C150FF /* ThreeDimentionTransform.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = ThreeDimentionTransform.vsh; sourceTree = "<group>"; };
+		3BA5AA28246D1D2D00C150FF /* ThreeDimentionTransform.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = ThreeDimentionTransform.fsh; sourceTree = "<group>"; };
 		3BCEC217246964CE00BD0C10 /* TestAVFoundationAspectRatioViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestAVFoundationAspectRatioViewController.h; sourceTree = "<group>"; };
 		3BCEC218246964CE00BD0C10 /* TestAVFoundationAspectRatioViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestAVFoundationAspectRatioViewController.m; sourceTree = "<group>"; };
 		3BCEC21E246A8B4E00BD0C10 /* GaryFilter.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = GaryFilter.fsh; sourceTree = "<group>"; };
@@ -127,6 +136,7 @@
 				3B7AC281246478D9006DDE6E /* 2. 画一张图片 */,
 				3BCEC2152469645E00BD0C10 /* 3. 纹理详解 */,
 				3BCEC21A246A88BD00BD0C10 /* 4. 滤镜链 */,
+				3BA5AA20246D16E900C150FF /* 5. 三维变换 */,
 			);
 			path = tests;
 			sourceTree = "<group>";
@@ -195,6 +205,18 @@
 				3B7AC28924647DDA006DDE6E /* image.fsh */,
 			);
 			path = "2. 画一张图片";
+			sourceTree = "<group>";
+		};
+		3BA5AA20246D16E900C150FF /* 5. 三维变换 */ = {
+			isa = PBXGroup;
+			children = (
+				3BA5AA21246D172500C150FF /* ThreeDimentionTransformViewController.h */,
+				3BA5AA22246D172500C150FF /* ThreeDimentionTransformViewController.m */,
+				3BA5AA23246D172500C150FF /* ThreeDimentionTransformViewController.xib */,
+				3BA5AA26246D1D1E00C150FF /* ThreeDimentionTransform.vsh */,
+				3BA5AA28246D1D2D00C150FF /* ThreeDimentionTransform.fsh */,
+			);
+			path = "5. 三维变换";
 			sourceTree = "<group>";
 		};
 		3BCEC2152469645E00BD0C10 /* 3. 纹理详解 */ = {
@@ -295,7 +317,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3BA5AA25246D172500C150FF /* ThreeDimentionTransformViewController.xib in Resources */,
+				3BA5AA27246D1D1E00C150FF /* ThreeDimentionTransform.vsh in Resources */,
 				3B7AC2862464790B006DDE6E /* avatar.JPG in Resources */,
+				3BA5AA29246D1D2D00C150FF /* ThreeDimentionTransform.fsh in Resources */,
 				3B01B1F6246268C700239EAD /* Assets.xcassets in Resources */,
 				3BCEC221246A8B6900BD0C10 /* BrightnessFilter.fsh in Resources */,
 				3BCEC21F246A8B4E00BD0C10 /* GaryFilter.fsh in Resources */,
@@ -315,6 +340,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3BA5AA24246D172500C150FF /* ThreeDimentionTransformViewController.m in Sources */,
 				3B76AE372469D0C000FBA7E8 /* OpenGLSampleModeViewController.m in Sources */,
 				3B7E6288246BE000001FA4CE /* CustomFilterChainViewController.m in Sources */,
 				3BCEC219246964CE00BD0C10 /* TestAVFoundationAspectRatioViewController.m in Sources */,

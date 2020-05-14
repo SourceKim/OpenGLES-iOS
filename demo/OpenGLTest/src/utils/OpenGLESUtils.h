@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 #import <OpenGLES/ES3/gl.h>
+#import <GLKit/GLKit.h>
 
 typedef NS_ENUM(NSUInteger, OpenGLFillMode) {
     OpenGLFillMode_AspectRatioFit, // 保持比例，使图片缩放至完整居中显示 （`AspectFit`），多余部分留白
@@ -35,6 +36,8 @@ NS_ASSUME_NONNULL_BEGIN
              withViewPortSize: (CGSize)viewPortSize;
 
 + (GLuint)loadImageTexture: (UIImage *)image;
+
++ (void)printMatrix4: (GLKMatrix4)matrix4;
 
 @end
 

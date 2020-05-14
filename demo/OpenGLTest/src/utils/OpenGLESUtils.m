@@ -152,4 +152,16 @@
     return textureID;
 }
 
++ (void)printMatrix4: (GLKMatrix4)matrix4 {
+    NSLog(@"\n"
+          @"%.2f  %.2f  %.2f  %.2f \n"
+          @"%.2f  %.2f  %.2f  %.2f \n"
+          @"%.2f  %.2f  %.2f  %.2f \n"
+          @"%.2f  %.2f  %.2f  %.2f \n",
+          matrix4.m00, matrix4.m01, matrix4.m02, matrix4.m03,
+          matrix4.m10, matrix4.m11, matrix4.m12, matrix4.m13,
+          matrix4.m20, matrix4.m21, matrix4.m22, matrix4.m23,
+          matrix4.m30, matrix4.m31, matrix4.m32, matrix4.m33);
+}
+
 @end
