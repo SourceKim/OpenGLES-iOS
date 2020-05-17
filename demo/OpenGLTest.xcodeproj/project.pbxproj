@@ -21,6 +21,10 @@
 		3B7AC2862464790B006DDE6E /* avatar.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 3B7AC2852464790B006DDE6E /* avatar.JPG */; };
 		3B7AC28824647D6F006DDE6E /* image.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 3B7AC28724647D6F006DDE6E /* image.vsh */; };
 		3B7AC28A24647DDA006DDE6E /* image.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 3B7AC28924647DDA006DDE6E /* image.fsh */; };
+		3B7D6256246ED67800171CC1 /* RotatingCubeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B7D6254246ED67800171CC1 /* RotatingCubeViewController.m */; };
+		3B7D6257246ED67800171CC1 /* RotatingCubeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B7D6255246ED67800171CC1 /* RotatingCubeViewController.xib */; };
+		3B7D625B246EF4A700171CC1 /* RotatingCube.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 3B7D625A246EF4A700171CC1 /* RotatingCube.vsh */; };
+		3B7D625D246EF50300171CC1 /* RotatingCube.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 3B7D625C246EF50300171CC1 /* RotatingCube.fsh */; };
 		3B7E6288246BE000001FA4CE /* CustomFilterChainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B7E6286246BE000001FA4CE /* CustomFilterChainViewController.m */; };
 		3B7E6289246BE000001FA4CE /* CustomFilterChainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B7E6287246BE000001FA4CE /* CustomFilterChainViewController.xib */; };
 		3B89454E2463277A0046F231 /* OpenGLESUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B89454D2463277A0046F231 /* OpenGLESUtils.m */; };
@@ -58,6 +62,11 @@
 		3B7AC2852464790B006DDE6E /* avatar.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = avatar.JPG; sourceTree = "<group>"; };
 		3B7AC28724647D6F006DDE6E /* image.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = image.vsh; sourceTree = "<group>"; };
 		3B7AC28924647DDA006DDE6E /* image.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = image.fsh; sourceTree = "<group>"; };
+		3B7D6253246ED67800171CC1 /* RotatingCubeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RotatingCubeViewController.h; sourceTree = "<group>"; };
+		3B7D6254246ED67800171CC1 /* RotatingCubeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RotatingCubeViewController.m; sourceTree = "<group>"; };
+		3B7D6255246ED67800171CC1 /* RotatingCubeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RotatingCubeViewController.xib; sourceTree = "<group>"; };
+		3B7D625A246EF4A700171CC1 /* RotatingCube.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = RotatingCube.vsh; sourceTree = "<group>"; };
+		3B7D625C246EF50300171CC1 /* RotatingCube.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = RotatingCube.fsh; sourceTree = "<group>"; };
 		3B7E6285246BE000001FA4CE /* CustomFilterChainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomFilterChainViewController.h; sourceTree = "<group>"; };
 		3B7E6286246BE000001FA4CE /* CustomFilterChainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomFilterChainViewController.m; sourceTree = "<group>"; };
 		3B7E6287246BE000001FA4CE /* CustomFilterChainViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomFilterChainViewController.xib; sourceTree = "<group>"; };
@@ -137,6 +146,7 @@
 				3BCEC2152469645E00BD0C10 /* 3. 纹理详解 */,
 				3BCEC21A246A88BD00BD0C10 /* 4. 滤镜链 */,
 				3BA5AA20246D16E900C150FF /* 5. 三维变换 */,
+				3B7D6252246ED4AF00171CC1 /* 6. 旋转的立方体 */,
 			);
 			path = tests;
 			sourceTree = "<group>";
@@ -205,6 +215,18 @@
 				3B7AC28924647DDA006DDE6E /* image.fsh */,
 			);
 			path = "2. 画一张图片";
+			sourceTree = "<group>";
+		};
+		3B7D6252246ED4AF00171CC1 /* 6. 旋转的立方体 */ = {
+			isa = PBXGroup;
+			children = (
+				3B7D6253246ED67800171CC1 /* RotatingCubeViewController.h */,
+				3B7D6254246ED67800171CC1 /* RotatingCubeViewController.m */,
+				3B7D6255246ED67800171CC1 /* RotatingCubeViewController.xib */,
+				3B7D625A246EF4A700171CC1 /* RotatingCube.vsh */,
+				3B7D625C246EF50300171CC1 /* RotatingCube.fsh */,
+			);
+			path = "6. 旋转的立方体";
 			sourceTree = "<group>";
 		};
 		3BA5AA20246D16E900C150FF /* 5. 三维变换 */ = {
@@ -318,10 +340,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				3BA5AA25246D172500C150FF /* ThreeDimentionTransformViewController.xib in Resources */,
+				3B7D6257246ED67800171CC1 /* RotatingCubeViewController.xib in Resources */,
 				3BA5AA27246D1D1E00C150FF /* ThreeDimentionTransform.vsh in Resources */,
 				3B7AC2862464790B006DDE6E /* avatar.JPG in Resources */,
 				3BA5AA29246D1D2D00C150FF /* ThreeDimentionTransform.fsh in Resources */,
 				3B01B1F6246268C700239EAD /* Assets.xcassets in Resources */,
+				3B7D625D246EF50300171CC1 /* RotatingCube.fsh in Resources */,
 				3BCEC221246A8B6900BD0C10 /* BrightnessFilter.fsh in Resources */,
 				3BCEC21F246A8B4E00BD0C10 /* GaryFilter.fsh in Resources */,
 				3B061A782462B242009DBDD3 /* passthrough.fsh in Resources */,
@@ -330,6 +354,7 @@
 				3B7AC28A24647DDA006DDE6E /* image.fsh in Resources */,
 				3BCEC223246A917000BD0C10 /* PassthroughTexture.vsh in Resources */,
 				3B7E6289246BE000001FA4CE /* CustomFilterChainViewController.xib in Resources */,
+				3B7D625B246EF4A700171CC1 /* RotatingCube.vsh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -352,6 +377,7 @@
 				3B89454E2463277A0046F231 /* OpenGLESUtils.m in Sources */,
 				3B01B1FC246268C700239EAD /* main.m in Sources */,
 				3B76AE2F246989E000FBA7E8 /* PreserAspectRatioForceViewController.m in Sources */,
+				3B7D6256246ED67800171CC1 /* RotatingCubeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -472,18 +498,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = VX2HK7W999;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = NYQACL8B77;
 				INFOPLIST_FILE = OpenGLTest/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.make.selfie;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kedc.OpenGLTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = Selfie_dev;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -492,18 +518,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = VX2HK7W999;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = NYQACL8B77;
 				INFOPLIST_FILE = OpenGLTest/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.make.selfie;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kedc.OpenGLTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = Selfie_dev;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
