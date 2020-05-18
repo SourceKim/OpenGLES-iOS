@@ -32,6 +32,10 @@
 		3BA5AA25246D172500C150FF /* ThreeDimentionTransformViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3BA5AA23246D172500C150FF /* ThreeDimentionTransformViewController.xib */; };
 		3BA5AA27246D1D1E00C150FF /* ThreeDimentionTransform.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 3BA5AA26246D1D1E00C150FF /* ThreeDimentionTransform.vsh */; };
 		3BA5AA29246D1D2D00C150FF /* ThreeDimentionTransform.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 3BA5AA28246D1D2D00C150FF /* ThreeDimentionTransform.fsh */; };
+		3BA5AB04247289D700C150FF /* RenderCameraBufferViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BA5AB02247289D700C150FF /* RenderCameraBufferViewController.m */; };
+		3BA5AB05247289D700C150FF /* RenderCameraBufferViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3BA5AB03247289D700C150FF /* RenderCameraBufferViewController.xib */; };
+		3BA5AB072472953F00C150FF /* RenderCameraBuffer.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 3BA5AB062472953F00C150FF /* RenderCameraBuffer.vsh */; };
+		3BA5AB092472954C00C150FF /* RenderCameraBuffer.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 3BA5AB082472954C00C150FF /* RenderCameraBuffer.fsh */; };
 		3BCEC219246964CE00BD0C10 /* TestAVFoundationAspectRatioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BCEC218246964CE00BD0C10 /* TestAVFoundationAspectRatioViewController.m */; };
 		3BCEC21F246A8B4E00BD0C10 /* GaryFilter.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 3BCEC21E246A8B4E00BD0C10 /* GaryFilter.fsh */; };
 		3BCEC221246A8B6900BD0C10 /* BrightnessFilter.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 3BCEC220246A8B6900BD0C10 /* BrightnessFilter.fsh */; };
@@ -77,6 +81,11 @@
 		3BA5AA23246D172500C150FF /* ThreeDimentionTransformViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ThreeDimentionTransformViewController.xib; sourceTree = "<group>"; };
 		3BA5AA26246D1D1E00C150FF /* ThreeDimentionTransform.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = ThreeDimentionTransform.vsh; sourceTree = "<group>"; };
 		3BA5AA28246D1D2D00C150FF /* ThreeDimentionTransform.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = ThreeDimentionTransform.fsh; sourceTree = "<group>"; };
+		3BA5AB01247289D700C150FF /* RenderCameraBufferViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RenderCameraBufferViewController.h; sourceTree = "<group>"; };
+		3BA5AB02247289D700C150FF /* RenderCameraBufferViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RenderCameraBufferViewController.m; sourceTree = "<group>"; };
+		3BA5AB03247289D700C150FF /* RenderCameraBufferViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RenderCameraBufferViewController.xib; sourceTree = "<group>"; };
+		3BA5AB062472953F00C150FF /* RenderCameraBuffer.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = RenderCameraBuffer.vsh; sourceTree = "<group>"; };
+		3BA5AB082472954C00C150FF /* RenderCameraBuffer.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = RenderCameraBuffer.fsh; sourceTree = "<group>"; };
 		3BCEC217246964CE00BD0C10 /* TestAVFoundationAspectRatioViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestAVFoundationAspectRatioViewController.h; sourceTree = "<group>"; };
 		3BCEC218246964CE00BD0C10 /* TestAVFoundationAspectRatioViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestAVFoundationAspectRatioViewController.m; sourceTree = "<group>"; };
 		3BCEC21E246A8B4E00BD0C10 /* GaryFilter.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = GaryFilter.fsh; sourceTree = "<group>"; };
@@ -147,6 +156,7 @@
 				3BCEC21A246A88BD00BD0C10 /* 4. 滤镜链 */,
 				3BA5AA20246D16E900C150FF /* 5. 三维变换 */,
 				3B7D6252246ED4AF00171CC1 /* 6. 旋转的立方体 */,
+				3BA5AB002472893B00C150FF /* 7. 渲染摄像头采集数据（CVOpenGLESTextureCacheRef） */,
 			);
 			path = tests;
 			sourceTree = "<group>";
@@ -239,6 +249,18 @@
 				3BA5AA28246D1D2D00C150FF /* ThreeDimentionTransform.fsh */,
 			);
 			path = "5. 三维变换";
+			sourceTree = "<group>";
+		};
+		3BA5AB002472893B00C150FF /* 7. 渲染摄像头采集数据（CVOpenGLESTextureCacheRef） */ = {
+			isa = PBXGroup;
+			children = (
+				3BA5AB01247289D700C150FF /* RenderCameraBufferViewController.h */,
+				3BA5AB02247289D700C150FF /* RenderCameraBufferViewController.m */,
+				3BA5AB03247289D700C150FF /* RenderCameraBufferViewController.xib */,
+				3BA5AB062472953F00C150FF /* RenderCameraBuffer.vsh */,
+				3BA5AB082472954C00C150FF /* RenderCameraBuffer.fsh */,
+			);
+			path = "7. 渲染摄像头采集数据（CVOpenGLESTextureCacheRef）";
 			sourceTree = "<group>";
 		};
 		3BCEC2152469645E00BD0C10 /* 3. 纹理详解 */ = {
@@ -339,6 +361,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3BA5AB072472953F00C150FF /* RenderCameraBuffer.vsh in Resources */,
+				3BA5AB092472954C00C150FF /* RenderCameraBuffer.fsh in Resources */,
 				3BA5AA25246D172500C150FF /* ThreeDimentionTransformViewController.xib in Resources */,
 				3B7D6257246ED67800171CC1 /* RotatingCubeViewController.xib in Resources */,
 				3BA5AA27246D1D1E00C150FF /* ThreeDimentionTransform.vsh in Resources */,
@@ -354,6 +378,7 @@
 				3B7AC28A24647DDA006DDE6E /* image.fsh in Resources */,
 				3BCEC223246A917000BD0C10 /* PassthroughTexture.vsh in Resources */,
 				3B7E6289246BE000001FA4CE /* CustomFilterChainViewController.xib in Resources */,
+				3BA5AB05247289D700C150FF /* RenderCameraBufferViewController.xib in Resources */,
 				3B7D625B246EF4A700171CC1 /* RotatingCube.vsh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -378,6 +403,7 @@
 				3B01B1FC246268C700239EAD /* main.m in Sources */,
 				3B76AE2F246989E000FBA7E8 /* PreserAspectRatioForceViewController.m in Sources */,
 				3B7D6256246ED67800171CC1 /* RotatingCubeViewController.m in Sources */,
+				3BA5AB04247289D700C150FF /* RenderCameraBufferViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
