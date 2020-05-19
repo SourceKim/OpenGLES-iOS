@@ -1,14 +1,16 @@
-////  RenderCameraBufferViewController.m
+////  RenderCameraYUVBufferViewController.m
 //  OpenGLTest
 //
-//  Created by Su Jinjin on 2020/5/18.
+//  Created by Su Jinjin on 2020/5/19.
 //  Copyright © 2020 苏金劲. All rights reserved.
 //
 
-#import "RenderCameraBufferViewController.h"
+#import "RenderCameraYUVBufferViewController.h"
 
 #import <AVFoundation/AVFoundation.h>
 #import "OpenGLESUtils.h"
+
+#import "YUV_To_RGB_Matrices_Vectors.h"
 
 static const GLfloat vertices[] = {
     -1, -1, 0, // 左下角
@@ -29,14 +31,15 @@ static const GLushort indices[] = {
     1, 3, 2
 };
 
-@interface RenderCameraBufferViewController ()<AVCaptureVideoDataOutputSampleBufferDelegate>
+@interface RenderCameraYUVBufferViewController ()<AVCaptureVideoDataOutputSampleBufferDelegate>
 
 @end
 
-@implementation RenderCameraBufferViewController {
+@implementation RenderCameraYUVBufferViewController {
     
     AVCaptureSession *_session;
     dispatch_queue_t _captureQueue;
+    bool _useFullRangeYUV; // 是否使用 FullRangeYUV，true 则是，false 则使用 VideoRange
     
     EAGLContext * _ctx;
     
@@ -50,7 +53,8 @@ static const GLushort indices[] = {
     CVOpenGLESTextureCacheRef _textureCache;
     
     // 纹理缓冲 id
-    GLuint _textureBufferIndex;
+    GLuint _lumaTextureBufferIndex; // 亮度 texture buffer
+    GLuint _chromaTextureBufferIndex; // 色差 texture buffer
     
     // FBOs / RBO / VAOs
     GLuint _FBO, _RBO, _VAO;
@@ -63,13 +67,19 @@ static const GLushort indices[] = {
     GLuint _texCoorLoc;
     
     // Uniforms 的 location （包括 texture 和 matrix）
-    GLuint _textureUniformLoc;
+    GLuint _lumaTextureUniformLoc; // 亮度 texture Uniform
+    GLuint _chromaTextureUniformLoc; // 色度 texture Uniform
+    GLuint _YUV_To_RGB_MatrixUniformLoc; // YUV 转 RGB 矩阵 Uniform （601 / 709 & VideoRange / FullRange）
+    GLuint _YUV_TranlationUniformLoc; // YUV 转 RGB 偏移 Uniform （VideoRange / FullRange）
+    
     GLuint _modelMatrixUniformLoc,
     _viewMatrixUniformLoc,
     _projectionMatrixUniformLoc;
     
-    // Uniforms Matrix 参数的值
+    // Uniforms Matrix & Vector 参数的值
     GLKMatrix4 _modelMatrix, _viewMatrix, _projectionMatrix;
+    
+    const GLfloat *_YUV_To_RGB_Matrix, *_YUV_Tranlation;
 }
 
 #pragma mark - Life Circle
@@ -77,7 +87,10 @@ static const GLushort indices[] = {
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _textureBufferIndex = 5;
+    _useFullRangeYUV = false;
+    
+    _lumaTextureBufferIndex = 5;
+    _chromaTextureBufferIndex = 7;
     
     _cameraDistance = 1;
     
@@ -89,7 +102,11 @@ static const GLushort indices[] = {
                                                   10);
     
     // 配置摄像头，采集 BGRA 数据
-    [self setupCamera: kCVPixelFormatType_32BGRA];
+    if (_useFullRangeYUV) {
+        [self setupCamera: kCVPixelFormatType_420YpCbCr8BiPlanarFullRange];
+    } else {
+        [self setupCamera: kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange];
+    }
 }
 
 // 在这儿 setup，能保证 glLayer 的 size 是正确的，否则更新它的 frame 可能会出错
@@ -109,7 +126,6 @@ static const GLushort indices[] = {
             [self->_session startRunning];
         }
     }];
-    
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -118,17 +134,12 @@ static const GLushort indices[] = {
     [_session stopRunning];
 }
 
-// 内存管理
-- (void)dealloc {
+#pragma mark - 采集的 Pixel Buffer 转换成 OpenGL ES 的 Texturex
+- (CVOpenGLESTextureRef)acquireTextureFromBuffer: (CVPixelBufferRef)buffer isLuma: (bool)isLuma {
     
-    CVOpenGLESTextureCacheFlush(_textureCache, 0);
-    glDeleteFramebuffers(1, &_FBO);
-    glDeleteVertexArrays(1, &_VAO);
-    glDeleteProgram(_glProgram);
-}
-
-#pragma mark - 采集的 Pixel Buffer 转换成 OpenGL ES 的 Texture
-- (CVOpenGLESTextureRef)acquireTextureFromBuffer: (CVPixelBufferRef)buffer {
+    GLint format = isLuma ? GL_LUMINANCE : GL_LUMINANCE_ALPHA; // 1 channel : 2 channel，无论 ES2 还是 ES3 都用这两个
+    size_t planeIndex = isLuma ? 0 : 1; // 选择某一个平面
+    GLenum textureIndex = isLuma ? _lumaTextureBufferIndex : _chromaTextureBufferIndex;
     
     // 将 PixelBuffer 转成 OpenGL ES 的 Texture，并且将句柄存在 cvTexture 中
     CVOpenGLESTextureRef cvTexture;
@@ -137,12 +148,12 @@ static const GLushort indices[] = {
                                                                 buffer,
                                                                 NULL,
                                                                 GL_TEXTURE_2D,
-                                                                GL_RGBA,
-                                                                (GLsizei)CVPixelBufferGetWidth(buffer),
-                                                                (GLsizei)CVPixelBufferGetHeight(buffer),
-                                                                GL_RGBA,
+                                                                format,
+                                                                (GLsizei)CVPixelBufferGetWidthOfPlane(buffer, planeIndex),
+                                                                (GLsizei)CVPixelBufferGetHeightOfPlane(buffer, planeIndex),
+                                                                format,
                                                                 GL_UNSIGNED_BYTE, // UInt8_t
-                                                                0,
+                                                                planeIndex,
                                                                 &cvTexture);
     
     // 错误设置上面的 internalFormat / format / type 参数都会导致 res 为 6683 ！
@@ -155,7 +166,7 @@ static const GLushort indices[] = {
     }
     
     // 激活 Texture & 为 Texture 设定纹理参数
-    glActiveTexture(GL_TEXTURE0 + _textureBufferIndex);
+    glActiveTexture(GL_TEXTURE0 + textureIndex);
     glBindTexture(GL_TEXTURE_2D, CVOpenGLESTextureGetName(cvTexture)); // CVOpenGLESTextureGetName 可以获得 texture id
     
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
@@ -167,6 +178,31 @@ static const GLushort indices[] = {
     glBindTexture(GL_TEXTURE_2D, 0);
     
     return cvTexture;
+}
+
+#pragma mark - 更新 YUV 转 RGB 的 Tramsform Matrix 和 Translation Vector
+
+- (void)updateMatrixAndVector:(CVImageBufferRef)imageBuffer
+                  isFullRange:(bool)isFullRange {
+    
+    CFTypeRef matrixType = CVBufferGetAttachment(imageBuffer, kCVImageBufferYCbCrMatrixKey, NULL);
+    bool use601;
+    
+    if (matrixType != NULL) {
+        use601 = CFStringCompare(matrixType, kCVImageBufferYCbCrMatrix_ITU_R_601_4, 0) == kCFCompareEqualTo;
+    } else {
+        use601 = true;
+    }
+    
+    if (use601) {
+        _YUV_To_RGB_Matrix = isFullRange ? kColorConversion601FullRange : kColorConversion601;
+    } else {
+        _YUV_To_RGB_Matrix = kColorConversion709;
+    }
+    
+    _YUV_Tranlation = isFullRange ? kColorTranslationFullRange : kColorTranslationVideoRange;
+    
+
 }
 
 #pragma mark - OpenGL ES
@@ -192,8 +228,8 @@ static const GLushort indices[] = {
 
 - (void)setupPrograms {
     // shaders
-    NSString *vertexPath = [[NSBundle mainBundle] pathForResource: @"RenderCameraBuffer" ofType: @"vsh"];
-    NSString *fragmentPath = [[NSBundle mainBundle] pathForResource: @"RenderCameraBuffer" ofType: @"fsh"];
+    NSString *vertexPath = [[NSBundle mainBundle] pathForResource: @"RenderCameraYUVBuffer" ofType: @"vsh"];
+    NSString *fragmentPath = [[NSBundle mainBundle] pathForResource: @"RenderCameraYUVBuffer" ofType: @"fsh"];
     
     GLuint vertex = [OpenGLESUtils createShader: vertexPath type: GL_VERTEX_SHADER];
     GLuint fragment = [OpenGLESUtils createShader: fragmentPath type: GL_FRAGMENT_SHADER];
@@ -206,7 +242,11 @@ static const GLushort indices[] = {
     _positionLoc = glGetAttribLocation(_glProgram, "position");
     _texCoorLoc = glGetAttribLocation(_glProgram, "texCoor");
     
-    _textureUniformLoc = glGetUniformLocation(_glProgram, "imageTexture");
+    _lumaTextureUniformLoc = glGetUniformLocation(_glProgram, "lumaTexture");
+    _chromaTextureUniformLoc = glGetUniformLocation(_glProgram, "chromaTexture");
+    
+    _YUV_To_RGB_MatrixUniformLoc = glGetUniformLocation(_glProgram, "YUV_To_RGB_Matrix");
+    _YUV_TranlationUniformLoc = glGetUniformLocation(_glProgram, "YUV_Translation");
     
     _modelMatrixUniformLoc = glGetUniformLocation(_glProgram, "modelMatrix");
     _viewMatrixUniformLoc = glGetUniformLocation(_glProgram, "viewMatrix");
@@ -285,14 +325,34 @@ static const GLushort indices[] = {
     glViewport(0, 0, size.width, size.height);
 }
 
-- (void)render: (CGSize)clearSize {
+- (void)render: (CGSize)clearSize lumaTextureId: (GLuint)lumaTextureId chromaTextureId: (GLuint)chromaTextureId {
     glUseProgram(_glProgram);
     glBindFramebuffer(GL_FRAMEBUFFER, _FBO);
     [self clearFBO: clearSize];
+    
+    // -- 上传 Uniforms -- Begin
+    
+    // MVP
     glUniformMatrix4fv(_modelMatrixUniformLoc, 1, GL_FALSE, _modelMatrix.m);
     glUniformMatrix4fv(_viewMatrixUniformLoc, 1, GL_FALSE, _viewMatrix.m);
     glUniformMatrix4fv(_projectionMatrixUniformLoc, 1, GL_FALSE, _projectionMatrix.m);
-    glUniform1i(_textureUniformLoc, _textureBufferIndex);
+    
+    // 亮度 texture
+    glActiveTexture(GL_TEXTURE0 + _lumaTextureBufferIndex);
+    glBindTexture(GL_TEXTURE_2D, lumaTextureId);
+    glUniform1i(_lumaTextureUniformLoc, _lumaTextureBufferIndex);
+    
+    // 色度 texture
+    glActiveTexture(GL_TEXTURE0 + _chromaTextureBufferIndex);
+    glBindTexture(GL_TEXTURE_2D, chromaTextureId);
+    glUniform1i(_chromaTextureUniformLoc, _chromaTextureBufferIndex);
+    
+    // YUV 转 RGB 矩阵和向量
+    glUniformMatrix3fv(_YUV_To_RGB_MatrixUniformLoc, 1, GL_FALSE, _YUV_To_RGB_Matrix);
+    glUniform3f(_YUV_TranlationUniformLoc, _YUV_Tranlation[0], _YUV_Tranlation[1], _YUV_Tranlation[2]);
+    
+    // -- 上传 Uniforms -- Finished
+    
     glBindVertexArray(_VAO); // 使用 VAO 的好处，就是一句 bind 来使用对应 VAO 即可
     glDrawElements(GL_TRIANGLE_STRIP, 2 * 3, GL_UNSIGNED_SHORT, 0);
 }
@@ -335,6 +395,18 @@ static const GLushort indices[] = {
     [_session addInput: input];
     
     AVCaptureVideoDataOutput *output = [[AVCaptureVideoDataOutput alloc] init];
+    NSArray *arr = [output availableVideoCVPixelFormatTypes];
+    for (NSNumber *num in arr) {
+        OSType type = num.unsignedIntValue;
+        if (type == kCVPixelFormatType_32BGRA ||
+            type == kCVPixelFormatType_420YpCbCr8BiPlanarFullRange ||
+            type == kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange) {
+            NSLog(@"Assume correctly");
+        } else {
+            NSLog(@"Assume wrong");
+        }
+            
+    }
     output.videoSettings = @{ (NSString *)kCVPixelBufferPixelFormatTypeKey: @(pixelFormatType) };
     [output setAlwaysDiscardsLateVideoFrames: true];
     [output setSampleBufferDelegate: self queue: _captureQueue];
@@ -372,19 +444,28 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
     
     CVPixelBufferLockBaseAddress(imageBuffer, 0);
-
-    CVOpenGLESTextureRef texture = [self acquireTextureFromBuffer: imageBuffer]; // PixelBuffer => OpenGL Texture
-    glBindTexture(GL_TEXTURE_2D, CVOpenGLESTextureGetName(texture)); // 这里注意要绑定这个 texture 到上下文，否则
     
-    [self render: _layerSize];
+    [self updateMatrixAndVector: imageBuffer isFullRange: _useFullRangeYUV]; // 更新 matrix 和 vector
+
+    CVOpenGLESTextureRef lumaTexture = [self acquireTextureFromBuffer: imageBuffer isLuma: true]; // PixelBuffer => OpenGL Texture
+    
+    CVOpenGLESTextureRef chromaTexture = [self acquireTextureFromBuffer: imageBuffer isLuma: false]; // PixelBuffer => OpenGL Texture
+    
+    [self render: _layerSize
+   lumaTextureId: CVOpenGLESTextureGetName(lumaTexture)
+ chromaTextureId: CVOpenGLESTextureGetName(chromaTexture)];
+    
     [self present];
     
     CVOpenGLESTextureCacheFlush(_textureCache, 0); // 渲染完毕之后清空一下 texture cache
     
     CVPixelBufferUnlockBaseAddress(imageBuffer, 0);
     
-    if (texture != NULL) { // 如果 texture 为 NULL，再 Release 就会出现 `EXC_BREAKPOINT` crash！
-        CFRelease(texture); // 没有这个，就会不再采集！！！！
+    if (lumaTexture != NULL) { // 如果 texture 为 NULL，再 Release 就会出现 `EXC_BREAKPOINT` crash！
+        CFRelease(lumaTexture); // 没有这个，就会不再采集！！！！
+    }
+    if (chromaTexture != NULL) { // 如果 texture 为 NULL，再 Release 就会出现 `EXC_BREAKPOINT` crash！
+        CFRelease(chromaTexture); // 没有这个，就会不再采集！！！！
     }
 }
 

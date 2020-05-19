@@ -36,6 +36,10 @@
 		3BA5AB05247289D700C150FF /* RenderCameraBufferViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3BA5AB03247289D700C150FF /* RenderCameraBufferViewController.xib */; };
 		3BA5AB072472953F00C150FF /* RenderCameraBuffer.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 3BA5AB062472953F00C150FF /* RenderCameraBuffer.vsh */; };
 		3BA5AB092472954C00C150FF /* RenderCameraBuffer.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 3BA5AB082472954C00C150FF /* RenderCameraBuffer.fsh */; };
+		3BA5AB0E24738C6000C150FF /* RenderCameraYUVBufferViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BA5AB0C24738C5F00C150FF /* RenderCameraYUVBufferViewController.m */; };
+		3BA5AB0F24738C6000C150FF /* RenderCameraYUVBufferViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3BA5AB0D24738C5F00C150FF /* RenderCameraYUVBufferViewController.xib */; };
+		3BA5AB112473AF5200C150FF /* RenderCameraYUVBuffer.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 3BA5AB102473AF5200C150FF /* RenderCameraYUVBuffer.vsh */; };
+		3BA5AB2E2473BF2600C150FF /* RenderCameraYUVBuffer.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 3BA5AB2D2473BF2600C150FF /* RenderCameraYUVBuffer.fsh */; };
 		3BCEC219246964CE00BD0C10 /* TestAVFoundationAspectRatioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BCEC218246964CE00BD0C10 /* TestAVFoundationAspectRatioViewController.m */; };
 		3BCEC21F246A8B4E00BD0C10 /* GaryFilter.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 3BCEC21E246A8B4E00BD0C10 /* GaryFilter.fsh */; };
 		3BCEC221246A8B6900BD0C10 /* BrightnessFilter.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 3BCEC220246A8B6900BD0C10 /* BrightnessFilter.fsh */; };
@@ -86,6 +90,12 @@
 		3BA5AB03247289D700C150FF /* RenderCameraBufferViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RenderCameraBufferViewController.xib; sourceTree = "<group>"; };
 		3BA5AB062472953F00C150FF /* RenderCameraBuffer.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = RenderCameraBuffer.vsh; sourceTree = "<group>"; };
 		3BA5AB082472954C00C150FF /* RenderCameraBuffer.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = RenderCameraBuffer.fsh; sourceTree = "<group>"; };
+		3BA5AB0B24738C5F00C150FF /* RenderCameraYUVBufferViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RenderCameraYUVBufferViewController.h; sourceTree = "<group>"; };
+		3BA5AB0C24738C5F00C150FF /* RenderCameraYUVBufferViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RenderCameraYUVBufferViewController.m; sourceTree = "<group>"; };
+		3BA5AB0D24738C5F00C150FF /* RenderCameraYUVBufferViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RenderCameraYUVBufferViewController.xib; sourceTree = "<group>"; };
+		3BA5AB102473AF5200C150FF /* RenderCameraYUVBuffer.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = RenderCameraYUVBuffer.vsh; sourceTree = "<group>"; };
+		3BA5AB2D2473BF2600C150FF /* RenderCameraYUVBuffer.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = RenderCameraYUVBuffer.fsh; sourceTree = "<group>"; };
+		3BA5AB2F2473C51500C150FF /* YUV_To_RGB_Matrices_Vectors.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YUV_To_RGB_Matrices_Vectors.h; sourceTree = "<group>"; };
 		3BCEC217246964CE00BD0C10 /* TestAVFoundationAspectRatioViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestAVFoundationAspectRatioViewController.h; sourceTree = "<group>"; };
 		3BCEC218246964CE00BD0C10 /* TestAVFoundationAspectRatioViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestAVFoundationAspectRatioViewController.m; sourceTree = "<group>"; };
 		3BCEC21E246A8B4E00BD0C10 /* GaryFilter.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = GaryFilter.fsh; sourceTree = "<group>"; };
@@ -157,6 +167,7 @@
 				3BA5AA20246D16E900C150FF /* 5. 三维变换 */,
 				3B7D6252246ED4AF00171CC1 /* 6. 旋转的立方体 */,
 				3BA5AB002472893B00C150FF /* 7. 渲染摄像头采集数据（CVOpenGLESTextureCacheRef） */,
+				3BA5AB0A24738C1D00C150FF /* 8. 渲染摄像头采集的 YUV（YCbCr）数据 */,
 			);
 			path = tests;
 			sourceTree = "<group>";
@@ -166,6 +177,7 @@
 			children = (
 				3B89454C2463277A0046F231 /* OpenGLESUtils.h */,
 				3B89454D2463277A0046F231 /* OpenGLESUtils.m */,
+				3BA5AB2F2473C51500C150FF /* YUV_To_RGB_Matrices_Vectors.h */,
 			);
 			path = utils;
 			sourceTree = "<group>";
@@ -261,6 +273,18 @@
 				3BA5AB082472954C00C150FF /* RenderCameraBuffer.fsh */,
 			);
 			path = "7. 渲染摄像头采集数据（CVOpenGLESTextureCacheRef）";
+			sourceTree = "<group>";
+		};
+		3BA5AB0A24738C1D00C150FF /* 8. 渲染摄像头采集的 YUV（YCbCr）数据 */ = {
+			isa = PBXGroup;
+			children = (
+				3BA5AB0B24738C5F00C150FF /* RenderCameraYUVBufferViewController.h */,
+				3BA5AB0C24738C5F00C150FF /* RenderCameraYUVBufferViewController.m */,
+				3BA5AB0D24738C5F00C150FF /* RenderCameraYUVBufferViewController.xib */,
+				3BA5AB102473AF5200C150FF /* RenderCameraYUVBuffer.vsh */,
+				3BA5AB2D2473BF2600C150FF /* RenderCameraYUVBuffer.fsh */,
+			);
+			path = "8. 渲染摄像头采集的 YUV（YCbCr）数据";
 			sourceTree = "<group>";
 		};
 		3BCEC2152469645E00BD0C10 /* 3. 纹理详解 */ = {
@@ -363,6 +387,7 @@
 			files = (
 				3BA5AB072472953F00C150FF /* RenderCameraBuffer.vsh in Resources */,
 				3BA5AB092472954C00C150FF /* RenderCameraBuffer.fsh in Resources */,
+				3BA5AB0F24738C6000C150FF /* RenderCameraYUVBufferViewController.xib in Resources */,
 				3BA5AA25246D172500C150FF /* ThreeDimentionTransformViewController.xib in Resources */,
 				3B7D6257246ED67800171CC1 /* RotatingCubeViewController.xib in Resources */,
 				3BA5AA27246D1D1E00C150FF /* ThreeDimentionTransform.vsh in Resources */,
@@ -370,6 +395,7 @@
 				3BA5AA29246D1D2D00C150FF /* ThreeDimentionTransform.fsh in Resources */,
 				3B01B1F6246268C700239EAD /* Assets.xcassets in Resources */,
 				3B7D625D246EF50300171CC1 /* RotatingCube.fsh in Resources */,
+				3BA5AB112473AF5200C150FF /* RenderCameraYUVBuffer.vsh in Resources */,
 				3BCEC221246A8B6900BD0C10 /* BrightnessFilter.fsh in Resources */,
 				3BCEC21F246A8B4E00BD0C10 /* GaryFilter.fsh in Resources */,
 				3B061A782462B242009DBDD3 /* passthrough.fsh in Resources */,
@@ -377,6 +403,7 @@
 				3B7AC28824647D6F006DDE6E /* image.vsh in Resources */,
 				3B7AC28A24647DDA006DDE6E /* image.fsh in Resources */,
 				3BCEC223246A917000BD0C10 /* PassthroughTexture.vsh in Resources */,
+				3BA5AB2E2473BF2600C150FF /* RenderCameraYUVBuffer.fsh in Resources */,
 				3B7E6289246BE000001FA4CE /* CustomFilterChainViewController.xib in Resources */,
 				3BA5AB05247289D700C150FF /* RenderCameraBufferViewController.xib in Resources */,
 				3B7D625B246EF4A700171CC1 /* RotatingCube.vsh in Resources */,
@@ -395,6 +422,7 @@
 				3B7E6288246BE000001FA4CE /* CustomFilterChainViewController.m in Sources */,
 				3BCEC219246964CE00BD0C10 /* TestAVFoundationAspectRatioViewController.m in Sources */,
 				3B7AC28424647904006DDE6E /* DrawImageViewController.m in Sources */,
+				3BA5AB0E24738C6000C150FF /* RenderCameraYUVBufferViewController.m in Sources */,
 				3B01B208246269EA00239EAD /* TriangleViewController.m in Sources */,
 				3B01B1F1246268C300239EAD /* ViewController.m in Sources */,
 				3B76AE332469C6AE00FBA7E8 /* OpenGLDisplayFillModeViewController.m in Sources */,
