@@ -101,7 +101,7 @@ static const GLushort indices[] = {
                                                   0.1,
                                                   10);
     
-    // 配置摄像头，采集 BGRA 数据
+    // 配置摄像头，采集 YUV 数据
     if (_useFullRangeYUV) {
         [self setupCamera: kCVPixelFormatType_420YpCbCr8BiPlanarFullRange];
     } else {
@@ -201,8 +201,6 @@ static const GLushort indices[] = {
     }
     
     _YUV_Tranlation = isFullRange ? kColorTranslationFullRange : kColorTranslationVideoRange;
-    
-
 }
 
 #pragma mark - OpenGL ES
