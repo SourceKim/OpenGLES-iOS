@@ -44,6 +44,10 @@
 		3BCEC21F246A8B4E00BD0C10 /* GaryFilter.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 3BCEC21E246A8B4E00BD0C10 /* GaryFilter.fsh */; };
 		3BCEC221246A8B6900BD0C10 /* BrightnessFilter.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 3BCEC220246A8B6900BD0C10 /* BrightnessFilter.fsh */; };
 		3BCEC223246A917000BD0C10 /* PassthroughTexture.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 3BCEC222246A917000BD0C10 /* PassthroughTexture.vsh */; };
+		3BD4DE7A2476FB6200C2951C /* LightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BD4DE782476FB6200C2951C /* LightViewController.m */; };
+		3BD4DE7B2476FB6200C2951C /* LightViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3BD4DE792476FB6200C2951C /* LightViewController.xib */; };
+		3BD4DE7D2476FBB000C2951C /* Light.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 3BD4DE7C2476FBB000C2951C /* Light.vsh */; };
+		3BD4DE7F2476FBBC00C2951C /* Light.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 3BD4DE7E2476FBBC00C2951C /* Light.fsh */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -102,6 +106,11 @@
 		3BCEC220246A8B6900BD0C10 /* BrightnessFilter.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = BrightnessFilter.fsh; sourceTree = "<group>"; };
 		3BCEC222246A917000BD0C10 /* PassthroughTexture.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = PassthroughTexture.vsh; sourceTree = "<group>"; };
 		3BCEC225246A9F2C00BD0C10 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		3BD4DE772476FB6200C2951C /* LightViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LightViewController.h; sourceTree = "<group>"; };
+		3BD4DE782476FB6200C2951C /* LightViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LightViewController.m; sourceTree = "<group>"; };
+		3BD4DE792476FB6200C2951C /* LightViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LightViewController.xib; sourceTree = "<group>"; };
+		3BD4DE7C2476FBB000C2951C /* Light.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = Light.vsh; sourceTree = "<group>"; };
+		3BD4DE7E2476FBBC00C2951C /* Light.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = Light.fsh; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +177,7 @@
 				3B7D6252246ED4AF00171CC1 /* 6. 旋转的立方体 */,
 				3BA5AB002472893B00C150FF /* 7. 渲染摄像头采集数据（CVOpenGLESTextureCacheRef） */,
 				3BA5AB0A24738C1D00C150FF /* 8. 渲染摄像头采集的 YUV（YCbCr）数据 */,
+				3BD4DE762476FB4400C2951C /* 9. 光照 */,
 			);
 			path = tests;
 			sourceTree = "<group>";
@@ -328,6 +338,18 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		3BD4DE762476FB4400C2951C /* 9. 光照 */ = {
+			isa = PBXGroup;
+			children = (
+				3BD4DE772476FB6200C2951C /* LightViewController.h */,
+				3BD4DE782476FB6200C2951C /* LightViewController.m */,
+				3BD4DE792476FB6200C2951C /* LightViewController.xib */,
+				3BD4DE7C2476FBB000C2951C /* Light.vsh */,
+				3BD4DE7E2476FBBC00C2951C /* Light.fsh */,
+			);
+			path = "9. 光照";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -385,6 +407,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3BD4DE7D2476FBB000C2951C /* Light.vsh in Resources */,
 				3BA5AB072472953F00C150FF /* RenderCameraBuffer.vsh in Resources */,
 				3BA5AB092472954C00C150FF /* RenderCameraBuffer.fsh in Resources */,
 				3BA5AB0F24738C6000C150FF /* RenderCameraYUVBufferViewController.xib in Resources */,
@@ -396,8 +419,10 @@
 				3B01B1F6246268C700239EAD /* Assets.xcassets in Resources */,
 				3B7D625D246EF50300171CC1 /* RotatingCube.fsh in Resources */,
 				3BA5AB112473AF5200C150FF /* RenderCameraYUVBuffer.vsh in Resources */,
+				3BD4DE7B2476FB6200C2951C /* LightViewController.xib in Resources */,
 				3BCEC221246A8B6900BD0C10 /* BrightnessFilter.fsh in Resources */,
 				3BCEC21F246A8B4E00BD0C10 /* GaryFilter.fsh in Resources */,
+				3BD4DE7F2476FBBC00C2951C /* Light.fsh in Resources */,
 				3B061A782462B242009DBDD3 /* passthrough.fsh in Resources */,
 				3B061A762462B224009DBDD3 /* passthrough.vsh in Resources */,
 				3B7AC28824647D6F006DDE6E /* image.vsh in Resources */,
@@ -424,6 +449,7 @@
 				3B7AC28424647904006DDE6E /* DrawImageViewController.m in Sources */,
 				3BA5AB0E24738C6000C150FF /* RenderCameraYUVBufferViewController.m in Sources */,
 				3B01B208246269EA00239EAD /* TriangleViewController.m in Sources */,
+				3BD4DE7A2476FB6200C2951C /* LightViewController.m in Sources */,
 				3B01B1F1246268C300239EAD /* ViewController.m in Sources */,
 				3B76AE332469C6AE00FBA7E8 /* OpenGLDisplayFillModeViewController.m in Sources */,
 				3B01B1EB246268C300239EAD /* AppDelegate.m in Sources */,

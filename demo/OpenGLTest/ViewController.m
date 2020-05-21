@@ -41,6 +41,7 @@ NSString * const kCellId = @"cellId";
         @"6. 旋转的立方体": @"RotatingCubeViewController",
         @"7. 渲染摄像头采集数据（CVOpenGLESTextureCacheRef）": @"RenderCameraBufferViewController",
         @"8. 渲染摄像头采集的 YUV（YCbCr）数据": @"RenderCameraYUVBufferViewController",
+        @"9. 光照": @"LightViewController",
     };
     
 }
