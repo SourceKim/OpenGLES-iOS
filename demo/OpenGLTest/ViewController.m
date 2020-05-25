@@ -11,7 +11,7 @@
 
 @property (nonatomic, strong) UITableView * table;
 
-@property (nonatomic, copy) NSDictionary<NSString *, NSString *> * testMap;
+@property (nonatomic, copy) NSArray<NSDictionary<NSString *, NSString *> *> * demoArray;
 
 @end
 
@@ -29,21 +29,27 @@ NSString * const kCellId = @"cellId";
     
     [_table registerClass: [UITableViewCell class] forCellReuseIdentifier: kCellId];
     
-    _testMap = @ {
-        @"1. 三角形": @"TriangleViewController",
-        @"2. 画一张图片": @"DrawImageViewController",
-        @"3.1. 纹理详解 - 纹理保持比例（暴力）": @"PreserAspectRatioForceViewController",
-        @"3.2. 纹理详解 - AVMakeRectWithAspectRatioInsideRect": @"TestAVFoundationAspectRatioViewController",
-        @"3.3. 纹理详解 - OpenGL ES 实现填充模式": @"OpenGLDisplayFillModeViewController",
-        @"3.4. 纹理详解 - OpenGL ES 采样模式": @"OpenGLSampleModeViewController",
-        @"4. 滤镜链": @"CustomFilterChainViewController",
-        @"5. 三维变换": @"ThreeDimentionTransformViewController",
-        @"6. 旋转的立方体": @"RotatingCubeViewController",
-        @"7. 渲染摄像头采集数据（CVOpenGLESTextureCacheRef）": @"RenderCameraBufferViewController",
-        @"8. 渲染摄像头采集的 YUV（YCbCr）数据": @"RenderCameraYUVBufferViewController",
-        @"9. 光照": @"LightViewController",
-    };
+    _demoArray = @ [
+                    @{@"1. 三角形": @"TriangleViewController"},
+                    @{@"2. 画一张图片": @"DrawImageViewController"},
+                    @{@"3.1. 纹理详解 - 纹理保持比例（暴力）": @"PreserAspectRatioForceViewController"},
+                    @{@"3.2. 纹理详解 - AVMakeRectWithAspectRatioInsideRect": @"TestAVFoundationAspectRatioViewController"},
+                    @{@"3.3. 纹理详解 - OpenGL ES 实现填充模式": @"OpenGLDisplayFillModeViewController"},
+                    @{@"3.4. 纹理详解 - OpenGL ES 采样模式": @"OpenGLSampleModeViewController"},
+                    @{@"4. 滤镜链": @"CustomFilterChainViewController"},
+                    @{@"5. 三维变换": @"ThreeDimentionTransformViewController"},
+                    @{@"6. 旋转的立方体": @"RotatingCubeViewController"},
+                    @{@"7. 渲染摄像头采集数据（CVOpenGLESTextureCacheRef）": @"RenderCameraBufferViewController"},
+                    @{@"8. 渲染摄像头采集的 YUV（YCbCr）数据": @"RenderCameraYUVBufferViewController"},
+                    @{@"9. 光照": @"LightViewController"},
+                    ];
     
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear: animated];
+    
+    self.title = @"Demo 列表";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -54,7 +60,7 @@ NSString * const kCellId = @"cellId";
         cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault reuseIdentifier: kCellId];
     }
     
-    cell.textLabel.text = [[_testMap allKeys] objectAtIndex: indexPath.item];
+    cell.textLabel.text = _demoArray[indexPath.item].allKeys.firstObject;
     
     return cell;
 }
@@ -64,13 +70,15 @@ NSString * const kCellId = @"cellId";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [_testMap allKeys].count;
+    return _demoArray.count;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    NSString *vcName = [[_testMap allValues] objectAtIndex: indexPath.item];
-    [self.navigationController pushViewController: [NSClassFromString(vcName) new] animated:true];
+    NSString *vcName = _demoArray[indexPath.item].allValues.firstObject;
+    UIViewController *vc = [NSClassFromString(vcName) new];
+    vc.title = _demoArray[indexPath.item].allKeys.firstObject;
+    [self.navigationController pushViewController: vc animated:true];
 }
 
 @end
