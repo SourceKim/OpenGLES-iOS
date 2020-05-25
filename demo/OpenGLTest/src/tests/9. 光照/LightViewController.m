@@ -202,13 +202,7 @@ static const GLfloat normals[] = {
     [self createBuffers];
     [self setupVAOs];
     
-    GLKMatrix4 lightTranslation = GLKMatrix4MakeTranslation(_lightPosition.x,
-                                                            _lightPosition.y,
-                                                            _lightPosition.z);
-    GLKMatrix4 lightScale = GLKMatrix4MakeScale(_lightScale, _lightScale, _lightScale);
-    
-    _lightModelMatrix = GLKMatrix4Multiply(lightTranslation, lightScale);
-    
+    [self setupLightCube];
     [self rotateCube];
     
     _viewMatrix = GLKMatrix4MakeLookAt(_eyePostion.x, _eyePostion.y, _eyePostion.z, 0, 0, 0, 0, 1, 0);
@@ -238,6 +232,19 @@ static const GLfloat normals[] = {
     glDeleteVertexArrays(1, &_objVAO);
     glDeleteProgram(_lightProgram);
     glDeleteProgram(_objProgram);
+}
+
+#pragma mark - Set up light Cube (By Model matrix)
+
+- (void)setupLightCube {
+    
+    GLKMatrix4 lightTranslation = GLKMatrix4MakeTranslation(_lightPosition.x,
+                                                            _lightPosition.y,
+                                                            _lightPosition.z);
+    GLKMatrix4 lightScale = GLKMatrix4MakeScale(_lightScale, _lightScale, _lightScale);
+    
+    _lightModelMatrix = GLKMatrix4Multiply(lightTranslation, lightScale);
+    
 }
 
 #pragma mark - Rotate the Cube (By Model matrix)
@@ -390,8 +397,13 @@ static const GLfloat normals[] = {
 }
 
 - (void)render: (CGSize)clearSize {
+    
+    // 0. Bind the FBO & Clear the FBO
+    
     glBindFramebuffer(GL_FRAMEBUFFER, _FBO);
     [self clearFBO: clearSize];
+    
+    // 1. Render light
     
     glUseProgram(_lightProgram);
     glUniformMatrix4fv(_modelMatrixUniformLoc, 1, GL_FALSE, _lightModelMatrix.m);
@@ -409,6 +421,8 @@ static const GLfloat normals[] = {
     glBindVertexArray(_lightVAO); // 使用 VAO 的好处，就是一句 bind 来使用对应 VAO 即可
     glDrawArrays(GL_TRIANGLES, 0, sizeof(vertices) / 3);
     
+    // 2. Render Object
+    
     glUseProgram(_objProgram);
     glUniformMatrix4fv(_modelMatrixUniformLoc, 1, GL_FALSE, _objModelMatrix.m);
     glUniformMatrix4fv(_viewMatrixUniformLoc, 1, GL_FALSE, _viewMatrix.m);
@@ -424,7 +438,6 @@ static const GLfloat normals[] = {
     
     glBindVertexArray(_objVAO); // 使用 VAO 的好处，就是一句 bind 来使用对应 VAO 即可
     glDrawArrays(GL_TRIANGLES, 0, sizeof(vertices) / 3);
-    
 }
 
 - (void)present {
