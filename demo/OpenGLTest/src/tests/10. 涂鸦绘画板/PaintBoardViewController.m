@@ -71,9 +71,6 @@
     };
     _glLayer.frame = self.view.bounds;
     [self.view.layer addSublayer: _glLayer];
-    
-    glEnable(GL_DEPTH_TEST);
-    glDepthFunc(GL_LESS);
 }
 
 - (void)setupPrograms {
@@ -122,8 +119,7 @@
 - (void)clearFBO: (CGSize)size {
 
     glClearColor(0, 0, 0, 1);
-    glClearDepthf(1);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT);
     
     glViewport(0, 0, size.width, size.height);
 }
@@ -132,74 +128,34 @@
     glGenBuffers(1, &_VBO);
 }
 
-- (GLuint)createVAO {
-    // 1. 初始化 VAO （接下来所有操作顶点操作都将加入到 VAO 中）
-    GLuint VAO;
-    glGenVertexArrays(1, &VAO);
-    glBindVertexArray(VAO);
-    
-    // 1.1 构造 & 激活 VBO
-    GLuint VBO[2];
-    glGenBuffers(2, VBO);
-    
-    glBindBuffer(GL_ARRAY_BUFFER, VBO[0]);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-    glVertexAttribPointer(_positionLoc, 3, GL_FLOAT, GL_FALSE, 0, 0);
-    glEnableVertexAttribArray(_positionLoc);
-    
-    glBindBuffer(GL_ARRAY_BUFFER, VBO[1]);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(normals), normals, GL_STATIC_DRAW);
-    glVertexAttribPointer(_normalLoc, 3, GL_FLOAT, GL_FALSE, 0, 0);
-    glEnableVertexAttribArray(_normalLoc);
-    
-    // 1.2 停用当前 VAO & VBO，注意顺序 （好习惯，单个的时候可以不写）
-    glBindVertexArray(0);
-    
-    glBindBuffer(VBO[0], 0);
-    
-    return VAO;
-}
-
 - (void)render: (CGSize)clearSize
         points: (NSArray<NSValue *> *)points {
+    
+    NSUInteger verticesCount = points.count;
+    float *vertices = malloc(sizeof(float) * verticesCount * 2);
+    
+    for (int i=0; i<verticesCount; i++) {
+        CGPoint point = points[i].CGPointValue;
+        vertices[i * 2] = point.x;
+        vertices[i * 2 + 1] = point.y;
+    }
     
     // 0. Bind the FBO & Clear the FBO
     
     glBindFramebuffer(GL_FRAMEBUFFER, _FBO);
     [self clearFBO: clearSize];
     
-    // 1. Render light
-    
     glUseProgram(_program);
     
-    glUniform3f(_colorUniformLoc, 1, 0, 0); // 物体颜色
+    glUniform3f(_colorUniformLoc, 1, 1, 1); // 物体颜色
     
-    glBindBuffer(GL_ARRAY_BUFFER, self.vertexBuffer);
-    GLsizeiptr bufferSizeBytes = sizeof(Vertex) * self.vertexCount;
-    glBufferData(GL_ARRAY_BUFFER, bufferSizeBytes, self.vertices, GL_DYNAMIC_DRAW);
+    glBindBuffer(GL_ARRAY_BUFFER, _VBO);
+    glBufferData(GL_ARRAY_BUFFER, verticesCount, vertices, GL_DYNAMIC_DRAW);
     
-    glEnableVertexAttribArray(positionSlot);
-    glVertexAttribPointer(positionSlot, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), NULL + offsetof(Vertex, positionCoord));
+    glEnableVertexAttribArray(_positionLoc);
+    glVertexAttribPointer(_positionLoc, 2, GL_FLOAT, GL_FALSE, 0, 0);
     
-    glDrawArrays(GL_TRIANGLES, 0, sizeof(vertices) / 3);
-    
-    // 2. Render Object
-    
-    glUseProgram(_objProgram);
-    glUniformMatrix4fv(_modelMatrixUniformLoc, 1, GL_FALSE, _objModelMatrix.m);
-    glUniformMatrix4fv(_viewMatrixUniformLoc, 1, GL_FALSE, _viewMatrix.m);
-    glUniformMatrix4fv(_projectionMatrixUniformLoc, 1, GL_FALSE, _projectionMatrix.m);
-    
-    glUniform3f(_originColorUniformLoc, _objColor.r, _objColor.g, _objColor.b); // 物体颜色
-    glUniform1i(_needLightUniformLoc, 1); // 是否需要光照
-    glUniform3f(_lightColorUniformLoc, _lightColor.r, _lightColor.g, _lightColor.b); // 光照颜色
-    glUniform1f(_ambientStrengthUniformLoc, _lightAmbientStrength); // 环境光强度
-    glUniform1f(_specularStrengthUniformLoc, _specularStrength); // 镜面光强度
-    glUniform3f(_lightPosUniformLoc, _lightPosition.x, _lightPosition.y, _lightPosition.z); // 光源的位置
-    glUniform3f(_eyePosUniformLoc, _eyePostion.x, _eyePostion.y, _eyePostion.z); // 眼睛（摄像机）的位置
-    
-    glBindVertexArray(_objVAO); // 使用 VAO 的好处，就是一句 bind 来使用对应 VAO 即可
-    glDrawArrays(GL_TRIANGLES, 0, sizeof(vertices) / 3);
+    glDrawArrays(GL_POINTS, 0, (int)verticesCount);
 }
 
 - (void)present {
@@ -211,8 +167,7 @@
 //    int depth;
 //    glGetIntegerv(GL_DEPTH_BITS, &depth);
 //    NSLog(@"%i bits depth", depth);
-    [self rotateCube];
-    [self render: _glLayer.bounds.size];
+    [self render: _glLayer.bounds.size points: @[@(CGPointMake(0.5, 0.5))]];
     [self present];
 }
 
