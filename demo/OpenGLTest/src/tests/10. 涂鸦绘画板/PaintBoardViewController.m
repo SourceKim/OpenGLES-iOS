@@ -9,16 +9,22 @@
 
 #import "OpenGLESUtils.h"
 
-@interface PaintBoardViewController ()
+#import "PaintBoardTouchManager.h"
+
+@interface PaintBoardViewController ()<PaintBoardTouchManagerDelegate>
 
 @end
 
 @implementation PaintBoardViewController {
     
+    PaintBoardTouchManager *_touchManager;
+    
+    CGFloat _pointSize;
+    
     EAGLContext * _ctx;
     
     CAEAGLLayer * _glLayer;
-    
+
     // FBOs / RBO / VAOs
     GLuint _FBO, _RBO, _VBO;
     
@@ -30,12 +36,21 @@
     
     // Uniforms 的 location （包括 texture 和 matrix）
     GLuint _colorUniformLoc;
+    
+    float *_vertices;
 }
 
 #pragma mark - Life Circle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    _pointSize = 5;
+    
+    _vertices = malloc(sizeof(float) * 256);
+    
+    _touchManager = [[PaintBoardTouchManager alloc] initWithView: self.view];
+    _touchManager.delegate = self;
     
 }
 
@@ -49,8 +64,34 @@
     [self createBuffers];
     [self setupVBO];
     
-    [self render];
+    [self clearFBO: self.view.bounds.size];
     
+    [self render: @[ @(CGPointMake(0.5, 0)) ] ];
+    [self present];
+
+}
+
+#pragma mark - Response - Touches & Touch Manager
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [_touchManager onTouchBegan: touches withEvent: event];
+}
+
+- (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [_touchManager onTouchMovedOrEnded: touches withEvent: event];
+}
+
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [_touchManager onTouchMovedOrEnded: touches withEvent: event];
+}
+
+- (void)onPointsOut:(NSArray<NSValue *> *)points {
+    [self render: points];
+    [self present];
+}
+
+- (CGFloat)currentPointSize {
+    return _pointSize;
 }
 
 #pragma mark - OpenGL ES
@@ -66,7 +107,7 @@
     _glLayer = [CAEAGLLayer layer];
     _glLayer.opaque = true;
     _glLayer.drawableProperties = @{
-        kEAGLDrawablePropertyRetainedBacking: @(false),
+        kEAGLDrawablePropertyRetainedBacking: @(true),
         kEAGLDrawablePropertyColorFormat: kEAGLColorFormatRGBA8,
     };
     _glLayer.frame = self.view.bounds;
@@ -114,10 +155,14 @@
     glBindFramebuffer(GL_FRAMEBUFFER, _FBO); // 使用 FBO，下面的激活 & 绑定操作都会对应到这个 FrameBuffer
     
     glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, _RBO); // 附着 渲染的颜色 RBO
+    
+//    glEnable(GL_BLEND);
+//    glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 - (void)clearFBO: (CGSize)size {
 
+    glBindFramebuffer(GL_FRAMEBUFFER, _FBO);
     glClearColor(0, 0, 0, 1);
     glClear(GL_COLOR_BUFFER_BIT);
     
@@ -128,29 +173,27 @@
     glGenBuffers(1, &_VBO);
 }
 
-- (void)render: (CGSize)clearSize
-        points: (NSArray<NSValue *> *)points {
+- (void)render: (NSArray<NSValue *> *)points {
     
     NSUInteger verticesCount = points.count;
-    float *vertices = malloc(sizeof(float) * verticesCount * 2);
     
     for (int i=0; i<verticesCount; i++) {
         CGPoint point = points[i].CGPointValue;
-        vertices[i * 2] = point.x;
-        vertices[i * 2 + 1] = point.y;
+        _vertices[i * 2] = point.x;
+        _vertices[i * 2 + 1] = point.y;
     }
     
-    // 0. Bind the FBO & Clear the FBO
+    // 0. Bind the FBO
+//    [self clearFBO: self.view.bounds.size];
     
     glBindFramebuffer(GL_FRAMEBUFFER, _FBO);
-    [self clearFBO: clearSize];
     
     glUseProgram(_program);
     
     glUniform3f(_colorUniformLoc, 1, 1, 1); // 物体颜色
     
     glBindBuffer(GL_ARRAY_BUFFER, _VBO);
-    glBufferData(GL_ARRAY_BUFFER, verticesCount, vertices, GL_DYNAMIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, verticesCount * 2 * sizeof(float), _vertices, GL_DYNAMIC_DRAW);
     
     glEnableVertexAttribArray(_positionLoc);
     glVertexAttribPointer(_positionLoc, 2, GL_FLOAT, GL_FALSE, 0, 0);
@@ -161,14 +204,6 @@
 - (void)present {
     glBindRenderbuffer(GL_RENDERBUFFER, _RBO);
     [_ctx presentRenderbuffer: GL_RENDERBUFFER];
-}
-
-- (void)render {
-//    int depth;
-//    glGetIntegerv(GL_DEPTH_BITS, &depth);
-//    NSLog(@"%i bits depth", depth);
-    [self render: _glLayer.bounds.size points: @[@(CGPointMake(0.5, 0.5))]];
-    [self present];
 }
 
 @end

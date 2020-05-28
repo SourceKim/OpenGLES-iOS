@@ -18,6 +18,8 @@
 		3B413C49247E7914000EE152 /* PaintBoardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B413C47247E7914000EE152 /* PaintBoardViewController.xib */; };
 		3B413C4B247E7949000EE152 /* PaintBoard.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 3B413C4A247E7949000EE152 /* PaintBoard.vsh */; };
 		3B413C4D247E7958000EE152 /* PaintBoard.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 3B413C4C247E7958000EE152 /* PaintBoard.fsh */; };
+		3B413C50247F5E8D000EE152 /* PaintBoardTouchManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B413C4F247F5E8D000EE152 /* PaintBoardTouchManager.m */; };
+		3B413C53247F63B6000EE152 /* MFBezierCurvesTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B413C52247F63B6000EE152 /* MFBezierCurvesTool.m */; };
 		3B76AE2F246989E000FBA7E8 /* PreserAspectRatioForceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B76AE2E246989E000FBA7E8 /* PreserAspectRatioForceViewController.m */; };
 		3B76AE332469C6AE00FBA7E8 /* OpenGLDisplayFillModeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B76AE322469C6AE00FBA7E8 /* OpenGLDisplayFillModeViewController.m */; };
 		3B76AE372469D0C000FBA7E8 /* OpenGLSampleModeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B76AE362469D0C000FBA7E8 /* OpenGLSampleModeViewController.m */; };
@@ -72,6 +74,10 @@
 		3B413C47247E7914000EE152 /* PaintBoardViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaintBoardViewController.xib; sourceTree = "<group>"; };
 		3B413C4A247E7949000EE152 /* PaintBoard.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = PaintBoard.vsh; sourceTree = "<group>"; };
 		3B413C4C247E7958000EE152 /* PaintBoard.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = PaintBoard.fsh; sourceTree = "<group>"; };
+		3B413C4E247F5E8D000EE152 /* PaintBoardTouchManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PaintBoardTouchManager.h; sourceTree = "<group>"; };
+		3B413C4F247F5E8D000EE152 /* PaintBoardTouchManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PaintBoardTouchManager.m; sourceTree = "<group>"; };
+		3B413C51247F63B6000EE152 /* MFBezierCurvesTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MFBezierCurvesTool.h; sourceTree = "<group>"; };
+		3B413C52247F63B6000EE152 /* MFBezierCurvesTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MFBezierCurvesTool.m; sourceTree = "<group>"; };
 		3B76AE2D246989E000FBA7E8 /* PreserAspectRatioForceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PreserAspectRatioForceViewController.h; sourceTree = "<group>"; };
 		3B76AE2E246989E000FBA7E8 /* PreserAspectRatioForceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PreserAspectRatioForceViewController.m; sourceTree = "<group>"; };
 		3B76AE312469C6AE00FBA7E8 /* OpenGLDisplayFillModeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenGLDisplayFillModeViewController.h; sourceTree = "<group>"; };
@@ -228,6 +234,10 @@
 				3B413C47247E7914000EE152 /* PaintBoardViewController.xib */,
 				3B413C4A247E7949000EE152 /* PaintBoard.vsh */,
 				3B413C4C247E7958000EE152 /* PaintBoard.fsh */,
+				3B413C4E247F5E8D000EE152 /* PaintBoardTouchManager.h */,
+				3B413C4F247F5E8D000EE152 /* PaintBoardTouchManager.m */,
+				3B413C51247F63B6000EE152 /* MFBezierCurvesTool.h */,
+				3B413C52247F63B6000EE152 /* MFBezierCurvesTool.m */,
 			);
 			path = "10. 涂鸦绘画板";
 			sourceTree = "<group>";
@@ -468,8 +478,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				3BA5AA24246D172500C150FF /* ThreeDimentionTransformViewController.m in Sources */,
+				3B413C50247F5E8D000EE152 /* PaintBoardTouchManager.m in Sources */,
 				3B76AE372469D0C000FBA7E8 /* OpenGLSampleModeViewController.m in Sources */,
 				3B7E6288246BE000001FA4CE /* CustomFilterChainViewController.m in Sources */,
+				3B413C53247F63B6000EE152 /* MFBezierCurvesTool.m in Sources */,
 				3BCEC219246964CE00BD0C10 /* TestAVFoundationAspectRatioViewController.m in Sources */,
 				3B7AC28424647904006DDE6E /* DrawImageViewController.m in Sources */,
 				3B413C48247E7914000EE152 /* PaintBoardViewController.m in Sources */,
