@@ -101,8 +101,8 @@ static inline CGPoint __MiddlePoint(CGPoint point1, CGPoint point2) {
 }
 
 - (NSMutableArray<NSValue *> *)getPoints: (CGPoint)from
-                          toPoint: (CGPoint)to
-                    withPointSize: (CGFloat)pointSize {
+                                 toPoint: (CGPoint)to
+                           withPointSize: (CGFloat)pointSize {
     
     CGFloat count = MAX(
                         ceilf(
@@ -128,7 +128,6 @@ static inline CGPoint __MiddlePoint(CGPoint point1, CGPoint point2) {
     }
     
     return mPoints;
-    
 }
 
 @end
