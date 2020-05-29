@@ -24,6 +24,10 @@
 		3B76AE2F246989E000FBA7E8 /* PreserAspectRatioForceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B76AE2E246989E000FBA7E8 /* PreserAspectRatioForceViewController.m */; };
 		3B76AE332469C6AE00FBA7E8 /* OpenGLDisplayFillModeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B76AE322469C6AE00FBA7E8 /* OpenGLDisplayFillModeViewController.m */; };
 		3B76AE372469D0C000FBA7E8 /* OpenGLSampleModeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B76AE362469D0C000FBA7E8 /* OpenGLSampleModeViewController.m */; };
+		3B7A457324818E3F0092699A /* BlendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B7A457124818E3F0092699A /* BlendViewController.m */; };
+		3B7A457424818E3F0092699A /* BlendViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B7A457224818E3F0092699A /* BlendViewController.xib */; };
+		3B7A45762481934A0092699A /* Blend.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 3B7A45752481934A0092699A /* Blend.vsh */; };
+		3B7A4578248193550092699A /* Blend.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 3B7A4577248193550092699A /* Blend.fsh */; };
 		3B7AC28424647904006DDE6E /* DrawImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B7AC28324647904006DDE6E /* DrawImageViewController.m */; };
 		3B7AC2862464790B006DDE6E /* avatar.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 3B7AC2852464790B006DDE6E /* avatar.JPG */; };
 		3B7AC28824647D6F006DDE6E /* image.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 3B7AC28724647D6F006DDE6E /* image.vsh */; };
@@ -85,6 +89,11 @@
 		3B76AE322469C6AE00FBA7E8 /* OpenGLDisplayFillModeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OpenGLDisplayFillModeViewController.m; sourceTree = "<group>"; };
 		3B76AE352469D0C000FBA7E8 /* OpenGLSampleModeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenGLSampleModeViewController.h; sourceTree = "<group>"; };
 		3B76AE362469D0C000FBA7E8 /* OpenGLSampleModeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OpenGLSampleModeViewController.m; sourceTree = "<group>"; };
+		3B7A457024818E3F0092699A /* BlendViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BlendViewController.h; sourceTree = "<group>"; };
+		3B7A457124818E3F0092699A /* BlendViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BlendViewController.m; sourceTree = "<group>"; };
+		3B7A457224818E3F0092699A /* BlendViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BlendViewController.xib; sourceTree = "<group>"; };
+		3B7A45752481934A0092699A /* Blend.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = Blend.vsh; sourceTree = "<group>"; };
+		3B7A4577248193550092699A /* Blend.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = Blend.fsh; sourceTree = "<group>"; };
 		3B7AC28224647904006DDE6E /* DrawImageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DrawImageViewController.h; sourceTree = "<group>"; };
 		3B7AC28324647904006DDE6E /* DrawImageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DrawImageViewController.m; sourceTree = "<group>"; };
 		3B7AC2852464790B006DDE6E /* avatar.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = avatar.JPG; sourceTree = "<group>"; };
@@ -195,6 +204,7 @@
 				3BA5AB0A24738C1D00C150FF /* 8. 渲染摄像头采集的 YUV（YCbCr）数据 */,
 				3BD4DE762476FB4400C2951C /* 9. 光照 */,
 				3B413C44247E78A5000EE152 /* 10. 涂鸦绘画板 */,
+				3B7A456F24818E160092699A /* 11.混合blend */,
 			);
 			path = tests;
 			sourceTree = "<group>";
@@ -276,6 +286,18 @@
 				3B76AE362469D0C000FBA7E8 /* OpenGLSampleModeViewController.m */,
 			);
 			path = "OpenGL ES 纹理采样模式";
+			sourceTree = "<group>";
+		};
+		3B7A456F24818E160092699A /* 11.混合blend */ = {
+			isa = PBXGroup;
+			children = (
+				3B7A457024818E3F0092699A /* BlendViewController.h */,
+				3B7A457124818E3F0092699A /* BlendViewController.m */,
+				3B7A457224818E3F0092699A /* BlendViewController.xib */,
+				3B7A45752481934A0092699A /* Blend.vsh */,
+				3B7A4577248193550092699A /* Blend.fsh */,
+			);
+			path = "11.混合blend";
 			sourceTree = "<group>";
 		};
 		3B7AC281246478D9006DDE6E /* 2. 画一张图片 */ = {
@@ -461,7 +483,9 @@
 				3B01B1F6246268C700239EAD /* Assets.xcassets in Resources */,
 				3B413C49247E7914000EE152 /* PaintBoardViewController.xib in Resources */,
 				3B7D625D246EF50300171CC1 /* RotatingCube.fsh in Resources */,
+				3B7A45762481934A0092699A /* Blend.vsh in Resources */,
 				3BA5AB112473AF5200C150FF /* RenderCameraYUVBuffer.vsh in Resources */,
+				3B7A4578248193550092699A /* Blend.fsh in Resources */,
 				3BD4DE7B2476FB6200C2951C /* LightViewController.xib in Resources */,
 				3BCEC221246A8B6900BD0C10 /* BrightnessFilter.fsh in Resources */,
 				3BCEC21F246A8B4E00BD0C10 /* GaryFilter.fsh in Resources */,
@@ -474,6 +498,7 @@
 				3BCEC223246A917000BD0C10 /* PassthroughTexture.vsh in Resources */,
 				3BA5AB2E2473BF2600C150FF /* RenderCameraYUVBuffer.fsh in Resources */,
 				3B4456CA2480E3190034D020 /* GlowBrush.png in Resources */,
+				3B7A457424818E3F0092699A /* BlendViewController.xib in Resources */,
 				3B7E6289246BE000001FA4CE /* CustomFilterChainViewController.xib in Resources */,
 				3B413C4D247E7958000EE152 /* PaintBoard.fsh in Resources */,
 				3BA5AB05247289D700C150FF /* RenderCameraBufferViewController.xib in Resources */,
@@ -492,6 +517,7 @@
 				3B413C50247F5E8D000EE152 /* PaintBoardTouchManager.m in Sources */,
 				3B76AE372469D0C000FBA7E8 /* OpenGLSampleModeViewController.m in Sources */,
 				3B7E6288246BE000001FA4CE /* CustomFilterChainViewController.m in Sources */,
+				3B7A457324818E3F0092699A /* BlendViewController.m in Sources */,
 				3BCEC219246964CE00BD0C10 /* TestAVFoundationAspectRatioViewController.m in Sources */,
 				3B7AC28424647904006DDE6E /* DrawImageViewController.m in Sources */,
 				3B413C48247E7914000EE152 /* PaintBoardViewController.m in Sources */,
@@ -626,18 +652,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = VX2HK7W999;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = NYQACL8B77;
 				INFOPLIST_FILE = OpenGLTest/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.one.touch.beaut;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kedc.OpenGLTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "OneTouchBeaut_ Development";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -646,18 +672,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = VX2HK7W999;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = NYQACL8B77;
 				INFOPLIST_FILE = OpenGLTest/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.one.touch.beaut;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kedc.OpenGLTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "OneTouchBeaut_ Development";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
