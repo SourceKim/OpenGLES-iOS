@@ -19,7 +19,8 @@
 		3B413C4B247E7949000EE152 /* PaintBoard.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 3B413C4A247E7949000EE152 /* PaintBoard.vsh */; };
 		3B413C4D247E7958000EE152 /* PaintBoard.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 3B413C4C247E7958000EE152 /* PaintBoard.fsh */; };
 		3B413C50247F5E8D000EE152 /* PaintBoardTouchManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B413C4F247F5E8D000EE152 /* PaintBoardTouchManager.m */; };
-		3B413C53247F63B6000EE152 /* MFBezierCurvesTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B413C52247F63B6000EE152 /* MFBezierCurvesTool.m */; };
+		3B4456C92480E3190034D020 /* RoundBrush.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B4456C72480E3180034D020 /* RoundBrush.png */; };
+		3B4456CA2480E3190034D020 /* GlowBrush.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B4456C82480E3180034D020 /* GlowBrush.png */; };
 		3B76AE2F246989E000FBA7E8 /* PreserAspectRatioForceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B76AE2E246989E000FBA7E8 /* PreserAspectRatioForceViewController.m */; };
 		3B76AE332469C6AE00FBA7E8 /* OpenGLDisplayFillModeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B76AE322469C6AE00FBA7E8 /* OpenGLDisplayFillModeViewController.m */; };
 		3B76AE372469D0C000FBA7E8 /* OpenGLSampleModeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B76AE362469D0C000FBA7E8 /* OpenGLSampleModeViewController.m */; };
@@ -76,8 +77,8 @@
 		3B413C4C247E7958000EE152 /* PaintBoard.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = PaintBoard.fsh; sourceTree = "<group>"; };
 		3B413C4E247F5E8D000EE152 /* PaintBoardTouchManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PaintBoardTouchManager.h; sourceTree = "<group>"; };
 		3B413C4F247F5E8D000EE152 /* PaintBoardTouchManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PaintBoardTouchManager.m; sourceTree = "<group>"; };
-		3B413C51247F63B6000EE152 /* MFBezierCurvesTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MFBezierCurvesTool.h; sourceTree = "<group>"; };
-		3B413C52247F63B6000EE152 /* MFBezierCurvesTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MFBezierCurvesTool.m; sourceTree = "<group>"; };
+		3B4456C72480E3180034D020 /* RoundBrush.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RoundBrush.png; sourceTree = "<group>"; };
+		3B4456C82480E3180034D020 /* GlowBrush.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GlowBrush.png; sourceTree = "<group>"; };
 		3B76AE2D246989E000FBA7E8 /* PreserAspectRatioForceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PreserAspectRatioForceViewController.h; sourceTree = "<group>"; };
 		3B76AE2E246989E000FBA7E8 /* PreserAspectRatioForceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PreserAspectRatioForceViewController.m; sourceTree = "<group>"; };
 		3B76AE312469C6AE00FBA7E8 /* OpenGLDisplayFillModeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenGLDisplayFillModeViewController.h; sourceTree = "<group>"; };
@@ -229,6 +230,7 @@
 		3B413C44247E78A5000EE152 /* 10. 涂鸦绘画板 */ = {
 			isa = PBXGroup;
 			children = (
+				3B4456C62480E3180034D020 /* 笔刷图片 */,
 				3B413C45247E7914000EE152 /* PaintBoardViewController.h */,
 				3B413C46247E7914000EE152 /* PaintBoardViewController.m */,
 				3B413C47247E7914000EE152 /* PaintBoardViewController.xib */,
@@ -236,10 +238,17 @@
 				3B413C4C247E7958000EE152 /* PaintBoard.fsh */,
 				3B413C4E247F5E8D000EE152 /* PaintBoardTouchManager.h */,
 				3B413C4F247F5E8D000EE152 /* PaintBoardTouchManager.m */,
-				3B413C51247F63B6000EE152 /* MFBezierCurvesTool.h */,
-				3B413C52247F63B6000EE152 /* MFBezierCurvesTool.m */,
 			);
 			path = "10. 涂鸦绘画板";
+			sourceTree = "<group>";
+		};
+		3B4456C62480E3180034D020 /* 笔刷图片 */ = {
+			isa = PBXGroup;
+			children = (
+				3B4456C72480E3180034D020 /* RoundBrush.png */,
+				3B4456C82480E3180034D020 /* GlowBrush.png */,
+			);
+			path = "笔刷图片";
 			sourceTree = "<group>";
 		};
 		3B76AE2C246989A900FBA7E8 /* 纹理保持比例（暴力） */ = {
@@ -460,9 +469,11 @@
 				3B061A782462B242009DBDD3 /* passthrough.fsh in Resources */,
 				3B061A762462B224009DBDD3 /* passthrough.vsh in Resources */,
 				3B7AC28824647D6F006DDE6E /* image.vsh in Resources */,
+				3B4456C92480E3190034D020 /* RoundBrush.png in Resources */,
 				3B7AC28A24647DDA006DDE6E /* image.fsh in Resources */,
 				3BCEC223246A917000BD0C10 /* PassthroughTexture.vsh in Resources */,
 				3BA5AB2E2473BF2600C150FF /* RenderCameraYUVBuffer.fsh in Resources */,
+				3B4456CA2480E3190034D020 /* GlowBrush.png in Resources */,
 				3B7E6289246BE000001FA4CE /* CustomFilterChainViewController.xib in Resources */,
 				3B413C4D247E7958000EE152 /* PaintBoard.fsh in Resources */,
 				3BA5AB05247289D700C150FF /* RenderCameraBufferViewController.xib in Resources */,
@@ -481,7 +492,6 @@
 				3B413C50247F5E8D000EE152 /* PaintBoardTouchManager.m in Sources */,
 				3B76AE372469D0C000FBA7E8 /* OpenGLSampleModeViewController.m in Sources */,
 				3B7E6288246BE000001FA4CE /* CustomFilterChainViewController.m in Sources */,
-				3B413C53247F63B6000EE152 /* MFBezierCurvesTool.m in Sources */,
 				3BCEC219246964CE00BD0C10 /* TestAVFoundationAspectRatioViewController.m in Sources */,
 				3B7AC28424647904006DDE6E /* DrawImageViewController.m in Sources */,
 				3B413C48247E7914000EE152 /* PaintBoardViewController.m in Sources */,
@@ -616,18 +626,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = NYQACL8B77;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = VX2HK7W999;
 				INFOPLIST_FILE = OpenGLTest/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.kedc.OpenGLTest;
+				PRODUCT_BUNDLE_IDENTIFIER = com.one.touch.beaut;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "OneTouchBeaut_ Development";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -636,18 +646,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = NYQACL8B77;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = VX2HK7W999;
 				INFOPLIST_FILE = OpenGLTest/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.kedc.OpenGLTest;
+				PRODUCT_BUNDLE_IDENTIFIER = com.one.touch.beaut;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "OneTouchBeaut_ Development";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

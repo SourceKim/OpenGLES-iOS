@@ -1,7 +1,9 @@
 attribute vec4 position;
 
+uniform float pointSize;
+
 void main (void) {
     gl_Position = position;
-    gl_PointSize = 5.0; // Todo: from uniform
+    gl_PointSize = pointSize;
 }
 
