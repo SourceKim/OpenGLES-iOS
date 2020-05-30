@@ -80,7 +80,7 @@ static const GLushort indices[] = {
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _img0 = [self createPureColorImage: UIColor.greenColor alpha: 0.5];
+    _img0 = [self createPureColorImage: UIColor.greenColor alpha: 1];
     _img1 = [self createPureColorImage: UIColor.redColor alpha: 0.5];
     
 }
@@ -121,7 +121,7 @@ static const GLushort indices[] = {
     _glLayer = [CAEAGLLayer layer];
     _glLayer.opaque = true;
     _glLayer.drawableProperties = @{
-        kEAGLDrawablePropertyRetainedBacking: @(true), // Todo??
+        kEAGLDrawablePropertyRetainedBacking: @(false), // Todo??
         kEAGLDrawablePropertyColorFormat: kEAGLColorFormatRGBA8,
     };
     _glLayer.frame = self.view.bounds;
@@ -165,9 +165,8 @@ static const GLushort indices[] = {
 
 - (void)clearFBO: (CGSize)size {
 
-    glClearColor(0, 0, 0, 1);
-    glClearDepthf(1);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glClearColor(0, 0, 0, 0);
+    glClear(GL_COLOR_BUFFER_BIT);
     
     glViewport(0, 0, size.width, size.height);
 }
